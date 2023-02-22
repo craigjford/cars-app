@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import DealerList from "./DealerList"
-import { useDispatch } from "react-redux"
-import { fetchDealers } from "./dealersSlice";
+import { useSelector} from "react-redux"
 
 function Dealers() {
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchDealers())
-  })
+  const dealers = useSelector((state) => state.dealers.entities);
+  console.log('dealers = ', dealers);
 
   return (
     <div className="App">
-        <DealerList />
+      <h1>Dealers page</h1>
+        {dealers.map((dealer) => <DealerList key={dealer.id} dealer={dealer}/>)}
+
     </div>
   )
 }
