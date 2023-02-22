@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchDealers = createAsyncThunk("dealers/fetchDealers", () => {
-  // return a Promise containing the data we want
   return fetch("/dealers")
     .then((response) => response.json())
-    .then((data) => console.log("dealers in fetch = ", data));
+    .then((dealers) => dealers.map((dealer) => dealerAdded(dealer)));
 });
 
 const dealersSlice = createSlice({
