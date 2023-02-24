@@ -17,9 +17,9 @@ const usersSlice = createSlice({
       // using createSlice lets us mutate state!
       state.entities.push(action.payload);
     },
-    // catUpdated(state, action) {
-    //   const cat = state.entities.find((cat) => cat.id === action.payload.id);
-    //   cat.url = action.payload.url;
+    // userUpdated(state, action) {
+    //   const cat = state.entities.find((user) => user.id === action.payload.id);
+    //   user.url = action.payload.url;
     // },
   },
   extraReducers: {

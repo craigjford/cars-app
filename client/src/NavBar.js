@@ -34,7 +34,6 @@ function NavBar({ userFound }) {
   return (
     <header>
       <div className="navbar">
-        <h1>NavBar page</h1>
           <NavLink
               to="/"
               exact="true"
@@ -44,7 +43,6 @@ function NavBar({ userFound }) {
           </NavLink>  
           <NavLink
             to="/login"
-            exact="true"
             style={navStyles}
           >
             Log In
