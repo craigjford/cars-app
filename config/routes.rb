@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   # namespace :api do
-    resources :repairs
-    resources :cars
-    resources :dealers
-    resources :users
+    # resources :repairs
+    # resources :cars
+    resources :dealers, only: [:index, :show, :create]
+    resources :users, only: [:show, :create]
 
     post "/signup", to: "users#create"
     get "/me", to: "users#show"

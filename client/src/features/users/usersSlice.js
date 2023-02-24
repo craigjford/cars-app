@@ -1,19 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchDealers = createAsyncThunk("dealers/fetchDealers", () => {
-  return fetch("/dealers")
+export const fetchUsers = createAsyncThunk("users/fetchUsers", () => {
+  return fetch("/users")
     .then((response) => response.json())
-    .then((dealers) => dealers);
+    .then((user) => user);
 });
 
-const dealersSlice = createSlice({
-  name: "dealers",
+const usersSlice = createSlice({
+  name: "users",
   initialState: {
-    entities: [], // array of dealers
+    entities: [], // array of users
     status: "idle", // loading state
   },
   reducers: {
-    dealerAdded(state, action) {
+    userAdded(state, action) {
       // using createSlice lets us mutate state!
       state.entities.push(action.payload);
     },
@@ -24,16 +24,16 @@ const dealersSlice = createSlice({
   },
   extraReducers: {
     // handle async actions: pending, fulfilled, rejected (for errors)
-    [fetchDealers.pending](state) {
+    [fetchUsers.pending](state) {
       state.status = "loading";
     },
-    [fetchDealers.fulfilled](state, action) {
+    [fetchUsers.fulfilled](state, action) {
       state.entities = action.payload;
       state.status = "idle";
     },
   },
 });
 
-export const { dealerAdded } = dealersSlice.actions;
+export const { userAdded } = usersSlice.actions;
 
-export default dealersSlice.reducer;
+export default usersSlice.reducer;
