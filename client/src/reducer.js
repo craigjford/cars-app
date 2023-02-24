@@ -1,8 +1,10 @@
-import { combineReducers } from "redux";
-import dealersReducer from "./features/dealers/dealersSlice";
+// import { combineReducers } from "redux";
+// import dealersReducer from "./features/dealers/dealersSlice";
+// import usersReducer from "./features/users/dealersSlice";
 
-const rootReducer = combineReducers({
-  cats: dealersReducer,
-});
+// const rootReducer = combineReducers({
+//   dealers: dealersReducer,
+//   user: usersReducer,
+// });
 
-export default rootReducer;
+// export default rootReducer;
