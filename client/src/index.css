@@ -101,7 +101,18 @@ div.center-lis {
 }
 
 .submit-btn {
-  background-color: lightseagreen;
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  font-size: 20px;
+  margin: 25px, 0px, 25px, 100px;
+}
+
+.any-btn {
+  background-color: blue;
+  font: 6px;
   border: none;
   color: white;
   padding: 10px 25px;

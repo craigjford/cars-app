@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import DealerList from "./DealerList";
 import DealerInput from "./DealerInput";
 import { useSelector} from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
-function Dealers() {
-  const [addingDealer, setAddingDealer] = useState(false)
+function Dealers({ user }) {
+  const [addingDealer, setAddingDealer] = useState(false);
+
+  const navigate = useNavigate();
+  if (!user) {navigate('/')};
+
   const dealers = useSelector((state) => state.dealers.entities);
   console.log('dealers = ', dealers);
 

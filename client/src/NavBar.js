@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+// import { useSelector } from "react-redux"; 
 
 const navStyles = ({ isActive }) => {
   return {  
@@ -13,9 +14,13 @@ const navStyles = ({ isActive }) => {
   };
 };  
 
-function NavBar({ userFound }) {
+function NavBar({ chgUser, user }) {
 
-  console.log('user = ', userFound);
+  // const users = useSelector((state) => state.users.entities);
+  // const user = users[0];
+
+  console.log('in NavBar - user = ', user);
+
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
@@ -23,7 +28,7 @@ function NavBar({ userFound }) {
     { method: "DELETE" })
     .then((r) => {
       if (r.ok) {
-        // logout();
+        chgUser("");
         navigate('/');
       }
     });
@@ -33,6 +38,29 @@ function NavBar({ userFound }) {
   return (
     <header>
       <div className="navbar">
+        {user ? (
+          <>
+          <NavLink
+            to="/home"
+            exact="true"
+            style={navStyles}
+          >
+            Home
+          </NavLink>  
+          <NavLink
+            to="/dealers"
+            style={navStyles}
+          >
+            All Dealers
+          </NavLink>  
+          <button className="any-btn" onClick={handleLogoutClick}>Logout</button>
+          <hr />
+          <br />
+          <br />
+          <br />
+          </>
+        ) : (
+          <>
           <NavLink
               to="/"
               exact="true"
@@ -52,8 +80,9 @@ function NavBar({ userFound }) {
           >
             Sign Up
           </NavLink>  
-        <hr />
-        <button className="submit-btn" onClick={handleLogoutClick}>Logout</button>
+          <hr />
+          </>
+        )}
       </div>
     </header>
   );

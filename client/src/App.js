@@ -4,34 +4,47 @@ import Home from "./Home";
 import NavBar from "./NavBar";
 import LogIn from "./LogIn";
 import UserSignUpForm from "./UserSignUpForm";
-// import Dealers from "./features/dealers/Dealers";
-import { useDispatch } from "react-redux";
+import Dealers from "./features/dealers/Dealers";
+// import { useDispatch, useSelector } from "react-redux";
 // import { fetchDealers } from "./features/dealers/dealersSlice";
-import { userAdded } from "./features/users/usersSlice";
+// import { userAdded } from "./features/users/usersSlice";
 import './App.css';
 
 function App() {
-  const [userFound, setUserFound] = useState(false);
+  const [user, setUser] = useState("");
+  // const [errors, setErrors] = useState("");
 
-  const dispatch = useDispatch();
+  // const users = useSelector((state) => state.users.entities);
+  // const user = users[0];
+
+  console.log('in App - user = ', user);
+
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     fetch('/me')
     .then(res => {
         if(res.ok) {
             res.json().then(user => {
-                dispatch(userAdded(user));
-                setUserFound(true)
+                setUser(user);
+                // dispatch(userAdded(user));
             })
         } else {
             res.json().then(error => {
-                setUserFound(false)
+                setUser("");
+                console.log("/me error = ", error)
+                // setUserFound(false)
             })
         }   
     })
-  }, [dispatch])
+  }, [])
+
+  const chgUser = (cjf) => {
+    setUser(cjf)
+  }
   
-  
+  console.log('in App - user2 = ', user);
+
   // useEffect(() => {
   //   dispatch(fetchDealers())
   // })
@@ -41,12 +54,30 @@ function App() {
   return (
     <>
       <main>
-        <NavBar userFound={userFound} />
-        <Routes>
+      <NavBar chgUser={chgUser} user={user} />
+        {user ? (
+          <Routes>
+            <Route exact="true" path="/" element={<Home user={user} />} />
+            <Route path="/dealers" element={<Dealers user={user} />} />
+            {/* <Route exact path="/alldealers" component={AllDealers} />
+            <Route path="/dealers/new" component={AllDealerForm} />
+            <Route exact path="/transactions" component={TransactionAll} />
+            <Route exact path="/transactions/new" component={TransactionForm} />
+            <Route path="/dealers/:dealer_id/transactions/delete" component={TransactionDelete} />
+            <Route path="/dealers/:dealer_id/transactions/edit" component={TransactionUpdate} /> */}
+            {/* <Route path="*">
+                <h1>404 - Page Not Found</h1>
+                <img src="https://bashooka.com/wp-content/uploads/2012/06/404-error-page-template-1.jpg" alt="Not Found" />
+            </Route>   */}
+          </Routes>
+          ) : (  
+          <Routes> 
             <Route exact="true" path="/" element={<Home />} />
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/signup" element={<UserSignUpForm />} />
-        </Routes>
+            <Route path="/login" element={<LogIn chgUser={chgUser} />} />
+            <Route path="/signup" element={<UserSignUpForm chgUser={chgUser} />} />
+            <Route path="*" element={<Home />} />
+          </Routes>  
+        )} 
       </main>
     </>
 

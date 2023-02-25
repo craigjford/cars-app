@@ -1,9 +1,11 @@
 import React from 'react';
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
-const Home = () => {
-  const users = useSelector((state) => state.users.entities)
-  const user = users[0];
+const Home = ({ user }) => {
+  // const users = useSelector((state) => state.users.entities)
+  // const user = users[0];
+
+  console.log('in Home - user = ', user);
 
   if (!user) {return <h1>Home Page - Please Login or Sign Up</h1>;}
     

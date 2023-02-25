@@ -20,10 +20,6 @@ const usersSlice = createSlice({
       const index = state.entities.findIndex((user) => user.id === action.payload);
       state.entities.splice(index, 1);
     },
-    // userUpdated(state, action) {
-    //   const cat = state.entities.find((user) => user.id === action.payload.id);
-    //   user.url = action.payload.url;
-    // },
   },
   extraReducers: {
     // handle async actions: pending, fulfilled, rejected (for errors)
