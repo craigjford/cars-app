@@ -42,7 +42,7 @@ function UserSignUpForm() {
                   navigate('/')
                 })
             } else { 
-                res.json().then(err => setErrors(err.errors))  
+                res.json().then(err => setErrors(err.errors))   
             }  
         })
     }

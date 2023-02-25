@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const navStyles = ({ isActive }) => {
   return {  
@@ -16,19 +16,18 @@ const navStyles = ({ isActive }) => {
 function NavBar({ userFound }) {
 
   console.log('user = ', userFound);
+  const navigate = useNavigate();
 
-  // const navigate = useNavigate();
-
-  // const handleLogoutClick = () => {
-  //   fetch("/logout", 
-  //   { method: "DELETE" })
-  //   .then((r) => {
-  //     if (r.ok) {
-  //       // logout();
-  //       navigate('/');
-  //     }
-  //   });
-  // }
+  const handleLogoutClick = () => {
+    fetch("/logout", 
+    { method: "DELETE" })
+    .then((r) => {
+      if (r.ok) {
+        // logout();
+        navigate('/');
+      }
+    });
+  }
 
 
   return (
@@ -54,6 +53,7 @@ function NavBar({ userFound }) {
             Sign Up
           </NavLink>  
         <hr />
+        <button className="submit-btn" onClick={handleLogoutClick}>Logout</button>
       </div>
     </header>
   );

@@ -14,8 +14,11 @@ const usersSlice = createSlice({
   },
   reducers: {
     userAdded(state, action) {
-      // using createSlice lets us mutate state!
       state.entities.push(action.payload);
+    },
+    userRemoved(state, action) {
+      const index = state.entities.findIndex((user) => user.id === action.payload);
+      state.entities.splice(index, 1);
     },
     // userUpdated(state, action) {
     //   const cat = state.entities.find((user) => user.id === action.payload.id);
