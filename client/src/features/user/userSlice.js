@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchUsers = createAsyncThunk("users/fetchUsers", () => {
-  return fetch("/users")
+export const fetchUser = createAsyncThunk("user/fetchUser", () => {
+  return fetch("/me")
     .then((response) => response.json())
-    .then((users) => users);
+    .then((user) => user);
 });
 
-const usersSlice = createSlice({
-  name: "users",
+const userSlice = createSlice({
+  name: "user",
   initialState: {
-    entities: [], // array of users
+    entities: [], // array of user
     status: "idle", // loading state
   },
   reducers: {
@@ -17,22 +17,23 @@ const usersSlice = createSlice({
       state.entities.push(action.payload);
     },
     userRemoved(state, action) {
-      const index = state.entities.findIndex((user) => user.id === action.payload);
+      console.log("action = ", action)
+      let index = state.entities.findIndex((user) => user.id === action.payload);
       state.entities.splice(index, 1);
     },
   },
   extraReducers: {
     // handle async actions: pending, fulfilled, rejected (for errors)
-    [fetchUsers.pending](state) {
+    [fetchUser.pending](state) {
       state.status = "loading";
     },
-    [fetchUsers.fulfilled](state, action) {
+    [fetchUser.fulfilled](state, action) {
       state.entities = action.payload;
       state.status = "idle";
     },
   },
 });
 
-export const { userAdded } = usersSlice.actions;
+export const { userAdded, userRemoved } = userSlice.actions;
 
-export default usersSlice.reducer;
+export default userSlice.reducer;

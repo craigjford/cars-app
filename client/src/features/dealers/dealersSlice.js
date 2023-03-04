@@ -17,9 +17,9 @@ const dealersSlice = createSlice({
       // using createSlice lets us mutate state!
       state.entities.push(action.payload);
     },
-    // catUpdated(state, action) {
-    //   const cat = state.entities.find((cat) => cat.id === action.payload.id);
-    //   cat.url = action.payload.url;
+    // dealerUpdated(state, action) {
+    //   const dealer = state.entities.find((dealer) => dealer.id === action.payload.id);
+    //   dealer.url = action.payload.url;
     // },
   },
   extraReducers: {

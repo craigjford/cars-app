@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { userAdded } from "./features/users/usersSlice"
+import { useDispatch } from 'react-redux';
+import { userAdded } from "./features/user/userSlice"
 
 const Login = ({ chgUser }) => {
   const [username, setUsername] = useState("");
@@ -9,7 +9,7 @@ const Login = ({ chgUser }) => {
   const [errors, setErrors] = useState("");
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,7 +26,7 @@ const Login = ({ chgUser }) => {
     .then(res => {
       if (res.ok) {
           res.json().then(user => {
-            // dispatch(userAdded(user));
+            dispatch(userAdded(user));
             setUsername("");
             setPassword("");
             chgUser(user);

@@ -5,21 +5,32 @@ import NavBar from "./NavBar";
 import LogIn from "./LogIn";
 import UserSignUpForm from "./UserSignUpForm";
 import Dealers from "./features/dealers/Dealers";
-// import { useDispatch, useSelector } from "react-redux";
+import CarInput from "./features/cars/CarInput";
+import { useDispatch } from "react-redux";
 // import { fetchDealers } from "./features/dealers/dealersSlice";
-// import { userAdded } from "./features/users/usersSlice";
+import { userAdded } from "./features/user/userSlice";
 import './App.css';
 
 function App() {
   const [user, setUser] = useState("");
   // const [errors, setErrors] = useState("");
 
+  // const dealers = useSelector((state) => state.dealers.entities);
+  // const isLoading = useSelector((state) => state.dealers.status === "loading");
+
+  // function handleClick() {
+  //   // dispatch the action creator (see below!)
+  //   dispatch(fetchAstronauts());
+  // }
+
+  // if (isLoading) return <p>Loading...</p>;
+
   // const users = useSelector((state) => state.users.entities);
   // const user = users[0];
 
   console.log('in App - user = ', user);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch('/me')
@@ -27,7 +38,7 @@ function App() {
         if(res.ok) {
             res.json().then(user => {
                 setUser(user);
-                // dispatch(userAdded(user));
+                dispatch(userAdded(user));
             })
         } else {
             res.json().then(error => {
@@ -37,7 +48,7 @@ function App() {
             })
         }   
     })
-  }, [])
+  }, [dispatch])
 
   const chgUser = (cjf) => {
     setUser(cjf)
@@ -49,7 +60,8 @@ function App() {
   //   dispatch(fetchDealers())
   // })
 
-  // if (loading) {return <h1>Loading....</h1>;}
+
+  // if (isLoading) return <p>Loading...</p>;
 
   return (
     <>
@@ -59,6 +71,7 @@ function App() {
           <Routes>
             <Route exact="true" path="/" element={<Home user={user} />} />
             <Route path="/dealers" element={<Dealers user={user} />} />
+            <Route path="/cars/new" element={<CarInput user={user} />} />
             {/* <Route exact path="/alldealers" component={AllDealers} />
             <Route path="/dealers/new" component={AllDealerForm} />
             <Route exact path="/transactions" component={TransactionAll} />

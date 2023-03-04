@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-// import { useSelector } from "react-redux"; 
+import { useDispatch } from "react-redux"; 
+import { userRemoved } from "./features/user/userSlice";
 
 const navStyles = ({ isActive }) => {
   return {  
@@ -16,8 +17,7 @@ const navStyles = ({ isActive }) => {
 
 function NavBar({ chgUser, user }) {
 
-  // const users = useSelector((state) => state.users.entities);
-  // const user = users[0];
+  const dispatch = useDispatch();
 
   console.log('in NavBar - user = ', user);
 
@@ -29,11 +29,11 @@ function NavBar({ chgUser, user }) {
     .then((r) => {
       if (r.ok) {
         chgUser("");
+        dispatch(userRemoved(user.id))
         navigate('/');
       }
     });
   }
-
 
   return (
     <header>
@@ -47,6 +47,12 @@ function NavBar({ chgUser, user }) {
           >
             Home
           </NavLink>  
+          <NavLink
+            to="/cars/new"
+            style={navStyles}
+          >
+            Add Car
+          </NavLink> 
           <NavLink
             to="/dealers"
             style={navStyles}

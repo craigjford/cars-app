@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { dealerAdded } from "./dealersSlice";
+import { useSelector, useDispatch  } from "react-redux";
+import { carAdded } from "./carsSlice";
 
-function DealerInput({ onSubmit }) {
+function CarInput({ user }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
-        name: "",
-        contact: "",
-        phone: "",
-        email: ""
+        user_id: user.id,
+        dealer_id: "",
+        year: "",
+        make: "", 
+        model: ""
     })
 
+    const dealers = useSelector((state) => state.dealers.entities);
     const dispatch = useDispatch();
+    console.log('dealers ', dealers);
 
     const handleChange = (e) => {
         const name = e.target.name
@@ -21,7 +24,7 @@ function DealerInput({ onSubmit }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         debugger
-        fetch ("/dealers", {
+        fetch ("/cars", {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
@@ -31,9 +34,8 @@ function DealerInput({ onSubmit }) {
         .then(res => {
             if (res.ok) {
                 res.json().then(data => {
-                    dispatch(dealerAdded(data))
+                    dispatch(carAdded(data))
                     initializeFormfields()
-                    onSubmit()
                 }) 
             } else {
                 res.json().then(err => setErrors(err.errors))
@@ -43,10 +45,11 @@ function DealerInput({ onSubmit }) {
       
     const initializeFormfields = () => { 
         const clearInput = {
-            name: "",
-            contact: "",
-            phone: "",
-            email: ""
+            user_id: user.id,
+            dealer_id: "",
+            year: "",
+            make: "", 
+            model: ""
         }
         setFormData(clearInput);
     }
@@ -54,17 +57,17 @@ function DealerInput({ onSubmit }) {
   return (
         <div>    
             <form onSubmit={handleSubmit}>
-                <label>Name: </label>
+                {/* <label>Dealer: </label>
                 <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
+                <br /> */}
+                <label>Year: </label>
+                <input type="text" id="year" name="year" value={formData.year} onChange={handleChange} />
                 <br />
-                <label>Contact: </label>
-                <input type="text" id="contact" name="contact" value={formData.contact} onChange={handleChange} />
+                <label>Make: </label>
+                <input type="text" id="make" name="make" value={formData.make} onChange={handleChange} />
                 <br />
-                <label>Phone: </label>
-                <input type="text" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
-                <br />
-                <label>EMail: </label>
-                <input type="text" id="email" name="email" value={formData.email} onChange={handleChange} />
+                <label>Model: </label>
+                <input type="text" id="model" name="model" value={formData.model} onChange={handleChange} />
                 <br />
                 <br />
                 <button type="submit">Submit</button>
@@ -76,4 +79,4 @@ function DealerInput({ onSubmit }) {
   )
 }
 
-export default DealerInput;
+export default CarInput;
