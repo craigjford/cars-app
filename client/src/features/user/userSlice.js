@@ -14,12 +14,20 @@ const userSlice = createSlice({
   },
   reducers: {
     userAdded(state, action) {
+      console.log("adding user in slicer - action = ", action)
       state.entities.push(action.payload);
     },
     userRemoved(state, action) {
-      console.log("action = ", action)
-      let index = state.entities.findIndex((user) => user.id === action.payload);
-      state.entities.splice(index, 1);
+      // console.log("removing user - action = ", action)
+      let bId = true;
+      while (bId) {
+          const idx = state.entities.findIndex((review) => review.restaurantId === action.payload);
+          if (idx === -1) {
+              bId = false
+          } else {
+              state.entities.splice(idx, 1);
+          }
+      } 
     },
   },
   extraReducers: {

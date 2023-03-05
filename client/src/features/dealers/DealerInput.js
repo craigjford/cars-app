@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { dealerAdded } from "./dealersSlice";
 
-function DealerInput({ onSubmit }) {
+function DealerInput({ setAddingDealer }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
         name: "",
@@ -20,7 +20,6 @@ function DealerInput({ onSubmit }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        debugger
         fetch ("/dealers", {
           method: "POST",
           headers: { 
@@ -33,7 +32,7 @@ function DealerInput({ onSubmit }) {
                 res.json().then(data => {
                     dispatch(dealerAdded(data))
                     initializeFormfields()
-                    onSubmit()
+                    setAddingDealer(false)
                 }) 
             } else {
                 res.json().then(err => setErrors(err.errors))

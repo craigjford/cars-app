@@ -15,11 +15,11 @@ const navStyles = ({ isActive }) => {
   };
 };  
 
-function NavBar({ chgUser, user }) {
+function NavBar({ loggedIn, setLoggedIn, user }) {
 
   const dispatch = useDispatch();
 
-  console.log('in NavBar - user = ', user);
+  console.log('in NavBar - loggedIn = ', loggedIn);
 
   const navigate = useNavigate();
 
@@ -28,8 +28,8 @@ function NavBar({ chgUser, user }) {
     { method: "DELETE" })
     .then((r) => {
       if (r.ok) {
-        chgUser("");
         dispatch(userRemoved(user.id))
+        setLoggedIn(false)
         navigate('/');
       }
     });
@@ -38,10 +38,10 @@ function NavBar({ chgUser, user }) {
   return (
     <header>
       <div className="navbar">
-        {user ? (
+        {loggedIn ? (
           <>
           <NavLink
-            to="/home"
+            to="/"
             exact="true"
             style={navStyles}
           >

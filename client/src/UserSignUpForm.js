@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { useDispatch } from "react-redux";
-// import { userAdded } from "./features/users/usersSlice"
+import { useDispatch } from "react-redux";
+import { userAdded } from "./features/user/userSlice"
 
-function UserSignUpForm({ chgUser }) {
+function UserSignUpForm({ setLoggedIn }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
         username: "",
@@ -13,7 +13,7 @@ function UserSignUpForm({ chgUser }) {
         last_name: ""
     })
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -36,10 +36,10 @@ function UserSignUpForm({ chgUser }) {
           .then(res => {
             if (res.ok) {
                 res.json().then(user => {
-                //   dispatch(userAdded(user)) 
+                  dispatch(userAdded(user)) 
                   console.log('user = ', user);
                   initializeFormfields();
-                  chgUser(user);
+                  setLoggedIn(true);
                   navigate('/');
                 })
             } else { 

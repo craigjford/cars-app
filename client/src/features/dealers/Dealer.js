@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DealerList({ dealer }) {
+function Dealer({ dealer }) {
 
   return (
     <div>
@@ -13,7 +13,7 @@ function DealerList({ dealer }) {
    )
  }
 
-export default DealerList;
+export default Dealer;
 
 
 

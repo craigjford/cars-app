@@ -13,7 +13,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     end
 
     def create
-        byebug
         dealer = Dealer.create!(dealer_params)
         render json: dealer, status: :created
     end
