@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { userAdded } from "./features/user/userSlice"
 
-function UserSignUpForm({ setLoggedIn }) {
+function UserSignUpForm() {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
         username: "",
@@ -25,7 +25,6 @@ function UserSignUpForm({ setLoggedIn }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('formData = ', formData);
         fetch("/signup", {
             method: "POST",
             headers: {
@@ -37,9 +36,7 @@ function UserSignUpForm({ setLoggedIn }) {
             if (res.ok) {
                 res.json().then(user => {
                   dispatch(userAdded(user)) 
-                  console.log('user = ', user);
                   initializeFormfields();
-                  setLoggedIn(true);
                   navigate('/');
                 })
             } else { 

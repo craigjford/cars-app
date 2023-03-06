@@ -1,9 +1,16 @@
 import React from 'react';
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-const Home = ({ user, loggedIn }) => {
+const Home = () => {
+
+  const userArr = useSelector((state) => state.user.entities);
+  const user = userArr[0];
+  const loggedIn = useSelector((state) => state.user.loggedIn);
+
   console.log('in Home - loggedIn = ', loggedIn);
   console.log('in Home - user = ', user);
+
+
   // const user2 = useSelector((state) => state.user.entities);
   // console.log('in Home - user2 = ', user2);
   if (loggedIn) {

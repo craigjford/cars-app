@@ -11,14 +11,15 @@ const userSlice = createSlice({
   initialState: {
     entities: [], // array of user
     status: "idle", // loading state
+    loggedIn: false
   },
   reducers: {
     userAdded(state, action) {
-      console.log("adding user in slicer - action = ", action)
       state.entities.push(action.payload);
+      state.loggedIn = true;
     },
     userRemoved(state, action) {
-      // console.log("removing user - action = ", action)
+      console.log("in user Splicer removing user - action = ", action)
       let bId = true;
       while (bId) {
           const idx = state.entities.findIndex((review) => review.restaurantId === action.payload);
@@ -29,11 +30,17 @@ const userSlice = createSlice({
           }
       } 
     },
+    userReset(state) {
+      state.entities.length = 0;
+      state.status = "idle";
+      state.loggedIn = false;
+    }
   },
   extraReducers: {
     // handle async actions: pending, fulfilled, rejected (for errors)
     [fetchUser.pending](state) {
       state.status = "loading";
+      state.loggedIn = false;
     },
     [fetchUser.fulfilled](state, action) {
       state.entities = action.payload;
@@ -42,6 +49,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { userAdded, userRemoved } = userSlice.actions;
+export const { userAdded, userRemoved, userReset } = userSlice.actions;
 
 export default userSlice.reducer;

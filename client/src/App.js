@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import NavBar from "./NavBar";
@@ -6,72 +6,43 @@ import LogIn from "./LogIn";
 import UserSignUpForm from "./UserSignUpForm";
 import Dealers from "./features/dealers/Dealers";
 import CarInput from "./features/cars/CarInput";
+import Cars from "./features/cars/Cars";
 import { useSelector, useDispatch } from "react-redux";
 // import { fetchDealers } from "./features/dealers/dealersSlice";
 import { userAdded } from "./features/user/userSlice";
 import './App.css';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const userArr = useSelector((state) => state.user.entities);
   const user = userArr[0];
-  console.log("loggedIn User ZZZZZZZZZZZZZ = ", user);
+  const loggedIn = useSelector((state) => state.user.loggedIn);
+
 
   // const dealers = useSelector((state) => state.dealers.entities);
   // const isLoading = useSelector((state) => state.dealers.status === "loading");
   // if (isLoading) return <p>Loading...</p>;
 
-
   console.log('in App - user = ', user);
 
   const dispatch = useDispatch();
-
-
-  // useEffect(() => {
-  //   fetch('/me')
-  //   .then(res => {
-  //       if(res.ok) {
-  //           res.json().then(userMe => {
-  //               console.log("in useEffect - user = ", user.length)
-  //               if (user.length < 1) {
-  //                 console.log("in useEffect if - dispatch - ", user.length )
-  //                 dispatch(userAdded(userMe));
-  //               } else {
-  //                 console.log("in useEffect else - dispatch -  ", user.length)
-  //               }
-  //           })
-  //       } else {
-  //           res.json().then(error => {
-  //               console.log("/me error = ", error)
-  //           })
-  //       }   
-  //   })
-  // }, [dispatch, user])
 
   useEffect(() => {
     fetch('/me')
     .then(res => {
         if(res.ok) {
             res.json().then(user => {
-              setLoggedIn(true);
+              // setLoggedIn(true);
               dispatch(userAdded(user));
             })
         } else {
             res.json().then(error => {
-                setLoggedIn(false)
+                // setLoggedIn(false)
                 console.log("/me error = ", error)
             })
         }   
     })
   }, [dispatch])
-
-  console.log('in App - user2 = ', user);
-
-  if (loggedIn) {
-    console.log('in App loggedIn - user = ', user)
-    // dispatch(userAdded(userMe));
-  }
 
   // if (isLoading) return <p>Loading...</p>;
   console.log('in App - user3 = ', user);
@@ -80,12 +51,13 @@ function App() {
   return (
     <>
       <main>
-      <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
+      <NavBar loggedIn={loggedIn} />
         {loggedIn ? (
           <Routes>
-            <Route exact="true" path="/" element={<Home user={user} loggedIn={loggedIn} />} />
-            <Route path="/dealers" element={<Dealers user={user} />} />
-            <Route path="/cars/new" element={<CarInput user={user} />} />
+            <Route exact="true" path="/" element={<Home />} />
+            <Route path="/dealers" element={<Dealers />} />
+            <Route path="/users/:user_id/cars" element={<Cars />} />  
+            <Route path="/cars/new" element={<CarInput />} />
             {/* <Route exact path="/alldealers" component={AllDealers} />
             <Route path="/dealers/new" component={AllDealerForm} />
             <Route exact path="/transactions" component={TransactionAll} />
@@ -99,10 +71,10 @@ function App() {
           </Routes>
           ) : (  
           <Routes> 
-            <Route exact="true" path="/" element={<Home loggedIn={loggedIn} />} />
-            <Route path="/login" element={<LogIn setLoggedIn={setLoggedIn} />} />
-            <Route path="/signup" element={<UserSignUpForm setLoggedIn={setLoggedIn} />} />
-            <Route path="*" element={<Home loggedIn={loggedIn} />} />
+            <Route exact="true" path="/" element={<Home />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/signup" element={<UserSignUpForm />} />
+            <Route path="*" element={<Home />} />
           </Routes>  
         )} 
       </main>

@@ -1,40 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import DealerList from "./Dealer";
+import Dealer from "./Dealer";
 import DealerInput from "./DealerInput";
 import { useSelector, useDispatch} from "react-redux";
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { fetchDealers } from "./dealersSlice";
 
-function Dealers({ user }) {
+function Dealers() {
   const [addingDealer, setAddingDealer] = useState(false);
 
-  console.log('in Dealers - user = ', user);
+  const navigate = useNavigate();
 
-  // const navigate = useNavigate();
+  const loggedIn = useSelector((state) => state.user.loggedIn);
+
+  if (!loggedIn) {navigate('/')};
+
   const dispatch = useDispatch();
     
   useEffect(() => {
     dispatch(fetchDealers())
   }, [dispatch])
 
-  // if (!user) {navigate('/')};
-
   const dealers = useSelector((state) => state.dealers.entities);
   const status = useSelector((state) => state.dealers.status);
-  console.log('dealers = ', dealers);
-  console.log('status = ', status);
+
+  if (status === "loading") {<h1>Loading....</h1>}
 
   const handleClick = () => {
-    console.log('handleClick = ', addingDealer);
     setAddingDealer(true);
-    console.log('handleClick2 = ', addingDealer);
   }
 
   return (
     <div className="App">
       <h1>Dealers page</h1>
-        {dealers.map((dealer) => <DealerList key={dealer.id} dealer={dealer}/>)}
-      <hr />
+        {dealers.map((dealer) => <Dealer key={dealer.id} dealer={dealer}/>)}
+      <br />
+      <br />
       {addingDealer ? null : <button type="button" onClick={handleClick}>Add Dealer</button>}
       <br />
       <br />

@@ -8,6 +8,7 @@ class UsersController < ApplicationController
         else
             user = User.find_by(id: session[:user_id])
             if user
+                current_user = user
                 render json: user, status: :ok
             else
                 render json: { errors: "User Session does not exist" }, status: :unauthorized

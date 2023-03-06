@@ -2,34 +2,44 @@ import React, { useState } from "react";
 import { useSelector, useDispatch  } from "react-redux";
 import { carAdded } from "./carsSlice";
 
-function CarInput({ user }) {
+function CarInput() {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
-        user_id: user.id,
+        user_id: "",
         dealer_id: "",
         year: "",
         make: "", 
         model: ""
     })
 
+    const userArr = useSelector((state) => state.user.entities);
+    const user = userArr[0];
+
     const dealers = useSelector((state) => state.dealers.entities);
     const dispatch = useDispatch();
     console.log('dealers ', dealers);
 
+    const dealerList = dealers.map((dealer) => (
+        <option key={dealer.id} value={dealer.id}>{dealer.name}</option>
+    ))
+
     const handleChange = (e) => {
         const name = e.target.name
-        setFormData({...formData, [name]: e.target.value})
+        if (e.target.name === "dealer_id") {
+            setFormData({...formData, [name]: parseInt(e.target.value)})
+        } else {
+            setFormData({...formData, [name]: e.target.value})
+        }    
     } 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        debugger
         fetch ("/cars", {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify({...formData, user_id: user.id})
         })  
         .then(res => {
             if (res.ok) {
@@ -57,9 +67,11 @@ function CarInput({ user }) {
   return (
         <div>    
             <form onSubmit={handleSubmit}>
-                {/* <label>Dealer: </label>
-                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
-                <br /> */}
+                <label>Dealer: </label>
+                <select id="dealers" name="dealer_id" onChange={handleChange}>
+                    {dealerList}
+                </select>    
+                <br />
                 <label>Year: </label>
                 <input type="text" id="year" name="year" value={formData.year} onChange={handleChange} />
                 <br />

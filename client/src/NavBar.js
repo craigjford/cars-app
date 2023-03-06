@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux"; 
-import { userRemoved } from "./features/user/userSlice";
+import { userReset } from "./features/user/userSlice";
 
 const navStyles = ({ isActive }) => {
   return {  
@@ -15,7 +15,7 @@ const navStyles = ({ isActive }) => {
   };
 };  
 
-function NavBar({ loggedIn, setLoggedIn, user }) {
+function NavBar({ loggedIn }) {
 
   const dispatch = useDispatch();
 
@@ -28,8 +28,7 @@ function NavBar({ loggedIn, setLoggedIn, user }) {
     { method: "DELETE" })
     .then((r) => {
       if (r.ok) {
-        dispatch(userRemoved(user.id))
-        setLoggedIn(false)
+        dispatch(userReset())
         navigate('/');
       }
     });
@@ -54,6 +53,12 @@ function NavBar({ loggedIn, setLoggedIn, user }) {
             Add Car
           </NavLink> 
           <NavLink
+            to="/users/:user_id/cars"
+            style={navStyles}
+          >
+            My Cars
+          </NavLink> 
+          <NavLink
             to="/dealers"
             style={navStyles}
           >
@@ -76,6 +81,7 @@ function NavBar({ loggedIn, setLoggedIn, user }) {
           </NavLink>  
           <NavLink
             to="/login"
+            exact="true"
             style={navStyles}
           >
             Log In

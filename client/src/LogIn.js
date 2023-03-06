@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userAdded } from "./features/user/userSlice"
 
-const Login = ({ setLoggedIn }) => {
+const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
@@ -26,14 +26,9 @@ const Login = ({ setLoggedIn }) => {
     .then(res => {
       if (res.ok) {
           res.json().then(user => {
-            console.log('right before dispatch')
             dispatch(userAdded(user));
-            console.log('right after dispatch')
             setUsername("");
             setPassword("");
-            console.log('right before Login');
-            setLoggedIn(true);
-            console.log('right after setLogIn')
             navigate('/');
           })
       } else { 
