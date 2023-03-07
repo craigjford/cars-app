@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch  } from "react-redux";
 import { carAdded } from "./carsSlice";
+// import {} from from "../dealers/dealerSlicer";
 
 function CarInput() {
     const [errors, setErrors] = useState([]);
@@ -12,12 +13,14 @@ function CarInput() {
         model: ""
     })
 
+    const loggedIn = useSelector((state) => state.user.loggedIn);
+    const dealers = useSelector((state) => state.dealers.entities);
     const userArr = useSelector((state) => state.user.entities);
     const user = userArr[0];
 
-    const dealers = useSelector((state) => state.dealers.entities);
     const dispatch = useDispatch();
-    console.log('dealers ', dealers);
+  
+    if (!loggedIn) return <h1>Home Page - Please Login or Sign Up</h1>;
 
     const dealerList = dealers.map((dealer) => (
         <option key={dealer.id} value={dealer.id}>{dealer.name}</option>
