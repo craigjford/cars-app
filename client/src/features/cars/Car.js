@@ -19,14 +19,17 @@ function Car({ car }) {
 
   return (
     <div>
-        <h3>User: {car.user_id}</h3>
-        <h3>Dealer: {car.dealer_id}</h3>
+        <h3>Dealer: {car.dealer.name}</h3>
+        <h3>Contact: {car.dealer.contact}</h3>
+        <h3>Phone: {car.dealer.phone}</h3>
+        <h3>Email: {car.dealer.email}</h3>
         <h3>Year: {car.year}</h3>
         <h3>Make: {car.make}</h3>
         <h3>Model: {car.model}</h3>
         <br />
         <button type="button" onClick={() => handleDelete(car)}>Delete Car</button>
         <button type="button" onClick={() => handleUpdate(car)}>Update Car</button>
+        <br />
         <br />
         <hr />
      </div>

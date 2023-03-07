@@ -53,7 +53,7 @@ function NavBar({ loggedIn }) {
             Add Car
           </NavLink> 
           <NavLink
-            to="/users/:user_id/cars"
+            to="mycars"
             style={navStyles}
           >
             My Cars

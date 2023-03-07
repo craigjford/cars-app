@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Dealer from "./Dealer";
 import DealerInput from "./DealerInput";
-import { useSelector, useDispatch} from "react-redux";
+import { useSelector} from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { fetchDealers } from "./dealersSlice";
+
 
 function Dealers() {
   const [addingDealer, setAddingDealer] = useState(false);
@@ -14,16 +14,7 @@ function Dealers() {
 
   if (!loggedIn) {navigate('/')};
 
-  const dispatch = useDispatch();
-    
-  useEffect(() => {
-    dispatch(fetchDealers())
-  }, [dispatch])
-
   const dealers = useSelector((state) => state.dealers.entities);
-  const status = useSelector((state) => state.dealers.status);
-
-  if (status === "loading") {<h1>Loading....</h1>}
 
   const handleClick = () => {
     setAddingDealer(true);

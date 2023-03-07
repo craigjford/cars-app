@@ -10,8 +10,7 @@ function Cars() {
 
   const navigate = useNavigate();
   const loggedIn = useSelector((state) => state.user.loggedIn);
-  // const userArr = useSelector((state) => state.user.entities);
-  // const user = userArr[0];
+
   if (!loggedIn) {navigate('/')};
 
   const dispatch = useDispatch();

@@ -8,7 +8,7 @@ import Dealers from "./features/dealers/Dealers";
 import CarInput from "./features/cars/CarInput";
 import Cars from "./features/cars/Cars";
 import { useSelector, useDispatch } from "react-redux";
-// import { fetchDealers } from "./features/dealers/dealersSlice";
+import { fetchDealers } from "./features/dealers/dealersSlice";
 import { userAdded } from "./features/user/userSlice";
 import './App.css';
 
@@ -17,11 +17,6 @@ function App() {
   const userArr = useSelector((state) => state.user.entities);
   const user = userArr[0];
   const loggedIn = useSelector((state) => state.user.loggedIn);
-
-
-  // const dealers = useSelector((state) => state.dealers.entities);
-  // const isLoading = useSelector((state) => state.dealers.status === "loading");
-  // if (isLoading) return <p>Loading...</p>;
 
   console.log('in App - user = ', user);
 
@@ -32,19 +27,23 @@ function App() {
     .then(res => {
         if(res.ok) {
             res.json().then(user => {
-              // setLoggedIn(true);
               dispatch(userAdded(user));
+              dispatch(fetchDealers());
             })
         } else {
             res.json().then(error => {
-                // setLoggedIn(false)
                 console.log("/me error = ", error)
             })
         }   
     })
   }, [dispatch])
 
-  // if (isLoading) return <p>Loading...</p>;
+  const userStatus = useSelector((state) => state.user.status)
+  const dealerStatus = useSelector((state) => state.dealers.status);
+
+  if (dealerStatus === "loading" || userStatus === "loading") return <h1>Loading....</h1>
+
+
   console.log('in App - user3 = ', user);
   console.log("in App - loggedIn - ", loggedIn);
 
@@ -56,7 +55,7 @@ function App() {
           <Routes>
             <Route exact="true" path="/" element={<Home />} />
             <Route path="/dealers" element={<Dealers />} />
-            <Route path="/users/:user_id/cars" element={<Cars />} />  
+            <Route path="mycars" element={<Cars />} />  
             <Route path="/cars/new" element={<CarInput />} />
             {/* <Route exact path="/alldealers" component={AllDealers} />
             <Route path="/dealers/new" component={AllDealerForm} />
