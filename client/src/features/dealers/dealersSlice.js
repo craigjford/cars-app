@@ -17,6 +17,11 @@ const dealersSlice = createSlice({
       // using createSlice lets us mutate state!
       state.entities.push(action.payload);
     },
+    dealerReset(state) {
+      state.entities.length = 0;
+      state.status = "idle";
+      state.loggedIn = false;
+    },
     // dealerUpdated(state, action) {
     //   const dealer = state.entities.find((dealer) => dealer.id === action.payload.id);
     //   dealer.url = action.payload.url;
@@ -34,6 +39,6 @@ const dealersSlice = createSlice({
   },
 });
 
-export const { dealerAdded } = dealersSlice.actions;
+export const { dealerAdded, dealerReset } = dealersSlice.actions;
 
 export default dealersSlice.reducer;

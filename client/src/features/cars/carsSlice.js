@@ -16,6 +16,11 @@ const carsSlice = createSlice({
     carAdded(state, action) {
       state.entities.push(action.payload);
     },
+    carReset(state) {
+      state.entities.length = 0;
+      state.status = "idle";
+      state.loggedIn = false;
+    },
     // repairAdded(state, action) {
     //   const idx = state.entities.findIndex(action.payload.id);
       
@@ -37,6 +42,6 @@ const carsSlice = createSlice({
   },
 });
 
-export const { carAdded, repairAdded } = carsSlice.actions;
+export const { carAdded, repairAdded, carReset } = carsSlice.actions;
 
 export default carsSlice.reducer;

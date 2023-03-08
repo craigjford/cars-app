@@ -10,6 +10,7 @@ import Cars from "./features/cars/Cars";
 import RepairInput from "./features/repairs/RepairInput";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDealers } from "./features/dealers/dealersSlice";
+import { fetchCars } from "./features/cars/carsSlice";
 import { userAdded } from "./features/user/userSlice";
 import './App.css';
 
@@ -30,6 +31,7 @@ function App() {
             res.json().then(user => {
               dispatch(userAdded(user));
               dispatch(fetchDealers());
+              dispatch(fetchCars());
             })
         } else {
             res.json().then(error => {
@@ -41,9 +43,11 @@ function App() {
 
   const userStatus = useSelector((state) => state.user.status)
   const dealerStatus = useSelector((state) => state.dealers.status);
+  const carsStatus = useSelector((state) => state.cars.status);
 
-  if (dealerStatus === "loading" || userStatus === "loading") return <h1>Loading....</h1>
-
+  if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading") {
+      return <h1>Loading....</h1>
+  }  
 
   console.log('in App - user3 = ', user);
   console.log("in App - loggedIn - ", loggedIn);

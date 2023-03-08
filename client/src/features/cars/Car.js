@@ -7,6 +7,7 @@ function Car({ car }) {
   const navigate = useNavigate();
 
   const loggedIn = useSelector((state) => state.user.loggedIn);
+  
   if (!loggedIn) {navigate('/')};
 
   const handleDelete = (car) => {
@@ -29,8 +30,8 @@ function Car({ car }) {
         <h3>Email: {car.dealer.email}</h3>
 
         <br />
-        <button type="button" onClick={() => handleDelete(car)}>Delete Car</button>
-        <button type="button" onClick={() => handleUpdate(car)}>Update Car</button>
+        <button type="button" className="submit-btn" onClick={() => handleDelete(car)}>Delete Car</button>
+        <button type="button" className="submit-btn" onClick={() => handleUpdate(car)}>Update Car</button>
         <br />
         <Link to={`/cars/${car.id}/repairs/new`}>
               <button className="submit-btn">Add Repair</button>

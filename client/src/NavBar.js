@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux"; 
 import { userReset } from "./features/user/userSlice";
+import { dealerReset } from "./features/dealers/dealersSlice";
+import { carReset } from "./features/cars/carsSlice";
 
 const navStyles = ({ isActive }) => {
   return {  
@@ -28,7 +30,9 @@ function NavBar({ loggedIn }) {
     { method: "DELETE" })
     .then((r) => {
       if (r.ok) {
-        dispatch(userReset())
+        dispatch(userReset());
+        dispatch(carReset());
+        dispatch(dealerReset());
         navigate('/');
       }
     });

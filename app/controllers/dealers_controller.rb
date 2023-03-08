@@ -3,8 +3,8 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
     def myindex
-        user = current_user
-        dealers = user.dealers
+        # current_user = User.find(1)
+        dealers = current_user.dealers
         render json: dealers, status: :ok
     end
     

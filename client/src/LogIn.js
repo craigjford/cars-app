@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { userAdded } from "./features/user/userSlice"
+import { useDispatch, useSelector } from 'react-redux';
+import { userAdded } from "./features/user/userSlice";
+import { fetchDealers } from "./features/dealers/dealersSlice";
+import { fetchCars } from "./features/cars/carsSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -27,6 +29,8 @@ const Login = () => {
       if (res.ok) {
           res.json().then(user => {
             dispatch(userAdded(user));
+            dispatch(fetchDealers());
+            dispatch(fetchCars());
             setUsername("");
             setPassword("");
             navigate('/');
@@ -39,6 +43,14 @@ const Login = () => {
     })  
   }   
   
+  const userStatus = useSelector((state) => state.user.status)
+  const dealerStatus = useSelector((state) => state.dealers.status);
+  const carsStatus = useSelector((state) => state.cars.status);
+
+  if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading") {
+      return <h1>Loading....</h1>
+  }  
+
   return (
     <div>
       <form onSubmit={handleSubmit}>

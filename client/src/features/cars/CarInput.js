@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch  } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { carAdded } from "./carsSlice";
 
 function CarInput() {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
-        user_id: "",
         dealer_id: "",
         year: "",
         make: "", 
@@ -17,9 +17,10 @@ function CarInput() {
     const userArr = useSelector((state) => state.user.entities);
     const user = userArr[0];
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
   
-    if (!loggedIn) return <h1>Home Page - Please Login or Sign Up</h1>;
+    if (!loggedIn) {navigate('/')};
 
     const dealerList = dealers.map((dealer) => (
         <option key={dealer.id} value={dealer.id}>{dealer.name}</option>
@@ -57,7 +58,6 @@ function CarInput() {
       
     const initializeFormfields = () => { 
         const clearInput = {
-            user_id: user.id,
             dealer_id: "",
             year: "",
             make: "", 

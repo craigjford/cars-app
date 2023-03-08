@@ -68,7 +68,7 @@ function RepairInput() {
         setFormData(clearInput);
     }
 
-    if (!loggedIn) return <h1>Home Page - Please Login or Sign Up</h1>;
+    if (!loggedIn) return <h1>Please Login or Sign Up</h1>;
 
   return (
         <div>    
