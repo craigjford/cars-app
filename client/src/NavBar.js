@@ -59,10 +59,10 @@ function NavBar({ loggedIn }) {
             My Cars
           </NavLink> 
           <NavLink
-            to="/dealers"
+            to="/mydealers"
             style={navStyles}
           >
-            All Dealers
+            My Dealers
           </NavLink>  
           <button className="any-btn" onClick={handleLogoutClick}>Logout</button>
           <hr />

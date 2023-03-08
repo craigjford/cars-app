@@ -7,6 +7,7 @@ import UserSignUpForm from "./UserSignUpForm";
 import Dealers from "./features/dealers/Dealers";
 import CarInput from "./features/cars/CarInput";
 import Cars from "./features/cars/Cars";
+import RepairInput from "./features/repairs/RepairInput";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDealers } from "./features/dealers/dealersSlice";
 import { userAdded } from "./features/user/userSlice";
@@ -54,9 +55,10 @@ function App() {
         {loggedIn ? (
           <Routes>
             <Route exact="true" path="/" element={<Home />} />
-            <Route path="/dealers" element={<Dealers />} />
-            <Route path="mycars" element={<Cars />} />  
+            <Route path="/mydealers" element={<Dealers />} />
+            <Route path="/mycars" element={<Cars />} />  
             <Route path="/cars/new" element={<CarInput />} />
+            <Route path="/cars/:car_id/repairs/new" element={<RepairInput />} />
             {/* <Route exact path="/alldealers" component={AllDealers} />
             <Route path="/dealers/new" component={AllDealerForm} />
             <Route exact path="/transactions" component={TransactionAll} />

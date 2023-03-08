@@ -14,9 +14,12 @@ const carsSlice = createSlice({
   },
   reducers: {
     carAdded(state, action) {
-      // using createSlice lets us mutate state!
       state.entities.push(action.payload);
     },
+    // repairAdded(state, action) {
+    //   const idx = state.entities.findIndex(action.payload.id);
+      
+    // },
     // carUpdated(state, action) {
     //   const car = state.entities.find((car) => car.id === action.payload.id);
     //   car.url = action.payload.url;
@@ -34,6 +37,6 @@ const carsSlice = createSlice({
   },
 });
 
-export const { carAdded } = carsSlice.actions;
+export const { carAdded, repairAdded } = carsSlice.actions;
 
 export default carsSlice.reducer;

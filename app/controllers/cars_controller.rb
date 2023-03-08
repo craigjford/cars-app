@@ -2,9 +2,10 @@ class CarsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
     def myindex 
-        current_user = User.find(session[:user_id])
+        current_user = User.find(1)
         cars = current_user.cars
         render json: cars, status: :ok
+        # render json: cars, [:include, :repairs], status: :ok
     end
 
     def create  

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch  } from "react-redux";
 import { carAdded } from "./carsSlice";
-// import {} from from "../dealers/dealerSlicer";
 
 function CarInput() {
     const [errors, setErrors] = useState([]);
