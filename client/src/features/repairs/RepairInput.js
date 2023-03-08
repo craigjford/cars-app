@@ -7,7 +7,6 @@ import { repairAdded } from "./repairsSlice";
 function RepairInput() {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
-        car_id: "",
         cost: "",
         service_desc: ""
     })
@@ -61,7 +60,6 @@ function RepairInput() {
       
     const initializeFormfields = () => { 
         const clearInput = {
-            car_id: car.id,
             cost: "",
             service_desc: ""
         }

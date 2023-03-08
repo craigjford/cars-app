@@ -66,7 +66,7 @@ function DealerInput({ setAddingDealer }) {
                 <input type="text" id="email" name="email" value={formData.email} onChange={handleChange} />
                 <br />
                 <br />
-                <button type="submit">Submit</button>
+                <button type="submit" className="submit-btn">Add Dealer</button>
             </form>
             <br />
             <br />

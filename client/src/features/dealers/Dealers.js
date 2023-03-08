@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 function Dealers() {
   const [addingDealer, setAddingDealer] = useState(false);
 
+  // dealers with cars
+
   const navigate = useNavigate();
 
   const loggedIn = useSelector((state) => state.user.loggedIn);
@@ -15,6 +17,7 @@ function Dealers() {
   if (!loggedIn) {navigate('/')};
 
   const dealers = useSelector((state) => state.dealers.entities);
+  console.log('DEALERS = ', dealers);
 
   const handleClick = () => {
     setAddingDealer(true);
@@ -26,7 +29,7 @@ function Dealers() {
         {dealers.map((dealer) => <Dealer key={dealer.id} dealer={dealer}/>)}
       <br />
       <br />
-      {addingDealer ? null : <button type="button" onClick={handleClick}>Add Dealer</button>}
+      {addingDealer ? null : <button type="button" className="submit-btn" onClick={handleClick}>Add Dealer</button>}
       <br />
       <br />
       <br />
