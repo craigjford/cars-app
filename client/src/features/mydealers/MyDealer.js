@@ -1,28 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { dealerRemoved } from "./dealersSlice";
+import { useSelector } from "react-redux";
 
-function Dealer({ dealer }) {
+function MyDealer({ dealer }) {
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   console.log('DEALER = ', dealer);
 
   const loggedIn = useSelector((state) => state.user.loggedIn);
   if (!loggedIn) {navigate('/')};
 
-  // const carsList = dealer.cars.map((car) => {
-  //   return <h3 key={car.id}><u>Car: {car.year} {car.make} {car.model}</u></h3>
-  // })
+  const carsList = dealer.cars.map((car) => {
+    return <h3 key={car.id}><u>Car: {car.year} {car.make} {car.model}</u></h3>
+  })
 
   const handleDelete = (dealer) => {
-      fetch(`/dealers/${dealer.id}`, {
-        method: 'DELETE'
-      })
-      .then(dispatch(dealerRemoved(dealer.id)))
-    }
+      debugger;
+  }
 
   const handleUpdate = (dealer) => {
       debugger;    
@@ -34,15 +29,15 @@ function Dealer({ dealer }) {
         <h3>Contact: {dealer.contact}</h3>
         <h3>Phone: {dealer.phone}</h3>
         <h3>Email: {dealer.email}</h3>
-            {/* {carsList} */}
+        <br />
+            {carsList}
         <br />
         <button type="button" className="any-btn" onClick={() => handleDelete(dealer)}>Delete Dealer</button>
         <button type="button" className="any-btn" onClick={() => handleUpdate(dealer)}>Update Dealer</button>
-        <br />
         <br />
         <hr />
      </div>
    )
  }
 
-export default Dealer;
+export default MyDealer;

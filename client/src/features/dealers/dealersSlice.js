@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchDealers = createAsyncThunk("dealers/fetchDealers", () => {
-  return fetch("/mydealers")
+  return fetch("/dealers")
     .then((response) => response.json())
     .then((dealers) => dealers);
 });
@@ -14,8 +14,12 @@ const dealersSlice = createSlice({
   },
   reducers: {
     dealerAdded(state, action) {
-      // using createSlice lets us mutate state!
       state.entities.push(action.payload);
+    },
+    dealerRemoved(state, action) {
+      const idx = state.entities.findIndex((dealer) => dealer.id === action.payload.id);
+      state.entities.splice(idx, 1);
+
     },
     dealerReset(state) {
       state.entities.length = 0;
@@ -39,6 +43,6 @@ const dealersSlice = createSlice({
   },
 });
 
-export const { dealerAdded, dealerReset } = dealersSlice.actions;
+export const { dealerAdded, dealerRemoved, dealerReset } = dealersSlice.actions;
 
 export default dealersSlice.reducer;

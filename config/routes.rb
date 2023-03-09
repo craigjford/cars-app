@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
     resources :repairs, only: [:create]
     resources :cars, only: [:create]
-    resources :dealers, only: [:show, :create]
+    resources :dealers, only: [:index, :show, :create, :destroy]
     # resources :users, only: [:show, :create]
 
     # this route is used to retrieve dealers with associated transactions to the logged in user  

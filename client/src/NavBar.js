@@ -67,7 +67,13 @@ function NavBar({ loggedIn }) {
             style={navStyles}
           >
             My Dealers
-          </NavLink>  
+          </NavLink> 
+          <NavLink
+            to="/dealers"
+            style={navStyles}
+          >
+            All Dealers
+          </NavLink> 
           <button className="any-btn" onClick={handleLogoutClick}>Logout</button>
           <hr />
           <br />

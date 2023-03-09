@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Dealer from "./Dealer";
-import DealerInput from "./DealerInput";
+import MyDealer from "./MyDealer";
+import MyDealerInput from "./MyDealerInput";
 import { useSelector} from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
-function Dealers() {
+function MyDealers() {
   const [addingDealer, setAddingDealer] = useState(false);
 
   // dealers with cars
@@ -15,8 +15,8 @@ function Dealers() {
 
   if (!loggedIn) {navigate('/')};
 
-  const dealers = useSelector((state) => state.dealers.entities);
-  console.log('DEALERS = ', dealers);
+  const mydealers = useSelector((state) => state.mydealers.entities);
+  console.log('DEALERS = ', mydealers);
 
   const handleClick = () => {
     setAddingDealer(true);
@@ -25,16 +25,16 @@ function Dealers() {
   return (
     <div className="App">
       <h1>Dealers page</h1>
-        {dealers.map((dealer) => <Dealer key={dealer.id} dealer={dealer}/>)}
+        {mydealers.map((mydealer) => <MyDealer key={mydealer.id} dealer={mydealer}/>)}
       <br />
       <br />
       {addingDealer ? null : <button type="button" className="submit-btn" onClick={handleClick}>Add Dealer</button>}
       <br />
       <br />
       <br />
-      {addingDealer ? <DealerInput setAddingDealer={setAddingDealer} /> : null}
+      {addingDealer ? <MyDealerInput setAddingDealer={setAddingDealer} /> : null}
     </div>
   )
 }
 
-export default Dealers;
+export default MyDealers;

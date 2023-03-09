@@ -8,6 +8,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
         render json: dealers, status: :ok
     end
     
+    def index
+        dealers = Dealer.all   
+        render json: dealers, each_serializer: DealerAllSerializer, status: :ok
+    end
+
     def show 
         dealer = Dealers.find(params[:id])
         render json: dealer
@@ -18,10 +23,19 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
         render json: dealer, status: :created
     end
 
+    def destroy
+        dealer = Dealer.find(params[:id])
+        dealer.destroy
+    end
+
     private
 
     def dealer_params 
         params.permit(:name, :contact, :phone, :email)
+    end
+
+    def find_dealer
+        current_user.dealers.find(params[:id])
     end
 
     def render_not_found(error)

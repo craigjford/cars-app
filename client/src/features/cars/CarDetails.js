@@ -1,14 +1,17 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
-function Car({ car }) {
+function CarDetails() {
 
   const navigate = useNavigate();
 
   const loggedIn = useSelector((state) => state.user.loggedIn);
   
   if (!loggedIn) {navigate('/')};
+
+  const params = useParams();
+  console.log("params car = ", params)
 
   // const handleDelete = (car) => {
   //     debugger;
@@ -20,24 +23,23 @@ function Car({ car }) {
 
   return (
     <div>
-        <br />
+        <h1>Car Details</h1>
+        {/* <br />
         <h3>Year: {car.year}</h3>
         <h3>Make: {car.make}</h3>
         <h3>Model: {car.model}</h3>
         <br />
-        <Link to={`/cars/${car.id}/edits`}>
-              <button className="submit-btn">Car Details</button>
-        </Link>
-        <br />
-        <hr />
+        <hr /> */}
         {/* <button type="button" className="submit-btn" onClick={() => handleDelete(car)}>Delete Car</button>
         <button type="button" className="submit-btn" onClick={() => handleUpdate(car)}>Update Car</button>
         <br />
-
+        <Link to={`/cars/${car.id}/repairs/new`}>
+              <button className="submit-btn">Add Repair</button>
+        </Link>
         <br />
         <hr /> */}
      </div>
    )
  }
 
-export default Car;
+export default CarDetails;
