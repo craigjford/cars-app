@@ -22,7 +22,7 @@ function App() {
   const user = userArr[0];
   const loggedIn = useSelector((state) => state.user.loggedIn);
 
-  console.log('in App - user = ', user);
+  console.log("in App - user = ", user);
 
   const dispatch = useDispatch();
 
@@ -50,9 +50,6 @@ function App() {
   if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading") {
       return <h1>Loading....</h1>
   }  
-
-  console.log('in App - user3 = ', user);
-  console.log("in App - loggedIn - ", loggedIn);
 
   return (
     <>

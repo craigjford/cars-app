@@ -37,9 +37,7 @@ function Cars() {
   return (
     <div className="App">
       <h1>My Cars</h1>
-      <br />
         {cars.map((car) => <Car key={car.id} car={car}/>)}
-      <br />
       {/* <br />
       {addingCar ? null : <button type="button" onClick={handleClick}>Add Car</button>}
       <br />

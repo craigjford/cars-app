@@ -20,9 +20,6 @@ const navStyles = ({ isActive }) => {
 function NavBar({ loggedIn }) {
 
   const dispatch = useDispatch();
-
-  console.log('in NavBar - loggedIn = ', loggedIn);
-
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
@@ -76,8 +73,6 @@ function NavBar({ loggedIn }) {
           </NavLink> 
           <button className="any-btn" onClick={handleLogoutClick}>Logout</button>
           <hr />
-          <br />
-          <br />
           <br />
           </>
         ) : (
