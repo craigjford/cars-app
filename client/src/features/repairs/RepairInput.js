@@ -1,31 +1,21 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { repairAdded } from "./repairsSlice";
-// import { repairAdded } from "../cars/carsSlice";
+import { carRepairAdded } from "../cars/carsSlice";
 
-function RepairInput() {
+function RepairInput({ carId, setAddingRepair }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
+        shop_name: "",
         cost: "",
         service_desc: ""
     })
 
     const loggedIn = useSelector((state) => state.user.loggedIn);
-    const cars = useSelector((state) => state.cars.entities)
-
 
     const dispatch = useDispatch();
-    const params = useParams();
-
-    let carArr = [];
-    let car = "";
-    
-
-    if (cars.length > 0) {
-        carArr = cars.filter((car) => parseInt(car.id) === parseInt(params.car_id)) 
-        car = carArr[0];
-    }
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -39,18 +29,20 @@ function RepairInput() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch (`/cars/${car.id}/repairs`, {
+        fetch ("/repairs", {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({...formData, car_id: params.car_id})
+          body: JSON.stringify({...formData, car_id: carId})
         })  
         .then(res => {
             if (res.ok) {
                 res.json().then(data => {
+                    dispatch(carRepairAdded(data))
                     dispatch(repairAdded(data))
-                    initializeFormfields()
+                    initializeFormfields();
+                    setAddingRepair(false);
                 }) 
             } else {
                 res.json().then(err => setErrors(err.errors))
@@ -60,32 +52,31 @@ function RepairInput() {
       
     const initializeFormfields = () => { 
         const clearInput = {
+            shop_name: "",
             cost: "",
             service_desc: ""
         }
         setFormData(clearInput);
     }
 
-    if (!loggedIn) return <h1>Please Login or Sign Up</h1>;
+    if (!loggedIn) {navigate('/')};
 
   return (
         <div>    
-            <main>
-                <h3><u>Car</u></h3>
-                <br />
-                <h3>Year: {car.year}</h3>
-                <h3>Brand: {car.brand}</h3>
-                <h3>Model: {car.model}</h3>
-            </main>
+            <br />
             <form onSubmit={handleSubmit}>
+                <label>Shop Name: </label>
+                <input type="text" id="shop_name" name="shop_name" value={formData.shop_name} onChange={handleChange} />
+                <br />
                 <label>Cost: </label>
                 <input type="text" id="cost" name="cost" value={formData.cost} onChange={handleChange} />
                 <br />
-                <label>Contact: </label>
+                <label>Service Description: </label>
                 <input type="text" id="service_desc" name="service_desc" value={formData.service_desc} onChange={handleChange} />
                 <br />
                 <br />
-                <button type="submit">Add Repair</button>
+                <button type="submit" className="submit-btn">Add Repair</button>
+                <button type="button" className="submit-btn" onClick={() => setAddingRepair(false)}>Cancel</button>
             </form>
             <br />
             <br />

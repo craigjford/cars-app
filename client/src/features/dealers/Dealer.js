@@ -22,7 +22,7 @@ function Dealer({ dealer }) {
         method: 'DELETE'
       })
       .then(dispatch(dealerRemoved(dealer.id)))
-    }
+  }
 
   const handleUpdate = (dealer) => {
       debugger;    
