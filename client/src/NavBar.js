@@ -48,12 +48,6 @@ function NavBar({ loggedIn }) {
             Home
           </NavLink>  
           <NavLink
-            to="/cars/new"
-            style={navStyles}
-          >
-            Add Car
-          </NavLink> 
-          <NavLink
             to="mycars"
             style={navStyles}
           >

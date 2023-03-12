@@ -8,15 +8,25 @@ class RepairsController < ApplicationController
     end
 
     def destroy 
-        repair = Repair.find(params[:id])
+        repair = find_repair
         repair.destroy
         head :no_content
     end
 
+    def update 
+        repair = find_repair
+        repair.update!(repair_params)
+        render json: repair, status: :accepted
+    end
+
     private
 
+    def find_repair
+        Repair.find(params[:id])
+    end
+
     def repair_params              
-        params.permit(:shop_name, :car_id, :cost, :service_desc)
+        params.permit(:car_id, :shop_name, :cost, :service_desc)
     end
 
     def render_not_found(error)

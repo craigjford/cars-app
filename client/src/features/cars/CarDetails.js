@@ -6,12 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { carRepairRemoved } from "./carsSlice";
 
 function CarDetails() {
-    const [addingRepair, setAddingRepair] = useState(false);
-    const [deletingRepair, setDeletingRepair] = useState(false);
-    const [updatingRepair, setUpdatingRepair] = useState(false);
-
-    console.log(" in Car Details - deletingRepair = ", deletingRepair);
-    console.log(" in Car Details - updatingingRepair = ", updatingRepair);
+  const [addingRepair, setAddingRepair] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,35 +17,32 @@ function CarDetails() {
   if (!loggedIn) {navigate('/')};
 
   const params = useParams();
-  console.log("params car = ", params);
 
   const filteredCar = cars.filter((car) => car.id === parseInt(params.car_id))
   const car = filteredCar[0];
 
   const handleDelete = (repair) => {
-       setDeletingRepair(true);
-       
-      fetch(`/repairs/${repair.id}`, {
+
+    fetch(`/repairs/${repair.id}`, {
         method: 'DELETE'
     })
     .then(dispatch(carRepairRemoved(repair)));
-
-    setDeletingRepair(false);
+    
   }
 
-  const handleUpdate = (repair) => {
-    setUpdatingRepair(true);    
-  }
-
-  const repairsList = car.repairs.map((repair) => <Repair key={repair.id} repair={repair} handleDelete={handleDelete} handleUpdate={handleUpdate} />);
+  const repairsList = car.repairs.map((repair) => <Repair key={repair.id} repair={repair} handleDelete={handleDelete} />);
 
   const handleClick = () => {
     setAddingRepair(true);
   }
 
+  const handleRepairSubmit = () => {
+    setAddingRepair(false);
+  }
+  
   return (
     <div>
-        <h1>Car Details</h1>
+        <h1><u><i>Car Details</i></u></h1>
         <h3>Year: {car.year}</h3>
         <h3>Make: {car.make}</h3>
         <h3>Model: {car.model}</h3>
@@ -66,16 +58,7 @@ function CarDetails() {
         <br />
         <br />
         <br />
-            {addingRepair ? <RepairInput carId={car.id} setAddingRepair={setAddingRepair} /> : null}
-
-        {/* <button type="button" className="submit-btn" onClick={() => handleDelete(car)}>Delete Car</button>
-        <button type="button" className="submit-btn" onClick={() => handleUpdate(car)}>Update Car</button>
-        <br />
-        <Link to={`/cars/${car.id}/repairs/new`}>
-              <button className="submit-btn">Add Repair</button>
-        </Link>
-        <br />
-        <hr /> */}
+            {addingRepair ? <RepairInput carId={car.id} handleRepairSubmit={handleRepairSubmit} /> : null}
      </div>
    )
  }

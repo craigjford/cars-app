@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { repairAdded } from "./repairsSlice";
 import { carRepairAdded } from "../cars/carsSlice";
 
-function RepairInput({ carId, setAddingRepair }) {
+function RepairInput({ carId, handleRepairSubmit }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
         shop_name: "",
@@ -27,43 +26,48 @@ function RepairInput({ carId, setAddingRepair }) {
         }
     } 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        fetch ("/repairs", {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({...formData, car_id: carId})
-        })  
-        .then(res => {
-            if (res.ok) {
-                res.json().then(data => {
-                    dispatch(carRepairAdded(data))
-                    dispatch(repairAdded(data))
-                    initializeFormfields();
-                    setAddingRepair(false);
-                }) 
-            } else {
-                res.json().then(err => setErrors(err.errors))
-            }
-        })
-    }
-      
-    const initializeFormfields = () => { 
-        const clearInput = {
-            shop_name: "",
-            cost: "",
-            service_desc: ""
-        }
-        setFormData(clearInput);
-    }
+  const handleSubmit = (e) => {
 
-    if (!loggedIn) {navigate('/')};
+    e.preventDefault();  
+
+    fetch(`/repairs`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({ 
+          ...formData,
+          car_id: carId
+      }),
+      })
+      .then((res) => {
+      if (res.ok) {
+          res.json().then((data) => {
+              dispatch(carRepairAdded(data))
+              initializeFormfields();
+              handleRepairSubmit();
+              setErrors([])
+          })
+      } else {
+          res.json().then((errors) => { 
+              setErrors(errors.errors)
+          })
+      }      
+      });
+  }
+
+  const initializeFormfields = () => { 
+    const clearInput = {
+        shop_name: "",
+        cost: "",
+        service_desc: ""
+    }
+    setFormData(clearInput);
+  }
+
+  if (!loggedIn) {navigate('/')};
 
   return (
-        <div>    
-            <br />
+    <div>
+        <> 
             <form onSubmit={handleSubmit}>
                 <label>Shop Name: </label>
                 <input type="text" id="shop_name" name="shop_name" value={formData.shop_name} onChange={handleChange} />
@@ -76,13 +80,14 @@ function RepairInput({ carId, setAddingRepair }) {
                 <br />
                 <br />
                 <button type="submit" className="submit-btn">Add Repair</button>
-                <button type="button" className="submit-btn" onClick={() => setAddingRepair(false)}>Cancel</button>
+                <button type="button" className="submit-btn" onClick={handleRepairSubmit}>Cancel</button>
             </form>
             <br />
             <br />
             {errors ? errors.map(e => <li style={{color:'red'}} key={e}>{e}</li>) : ""}
-        </div>
-  )
+        </>
+    </div>
+  );
 }
 
 export default RepairInput;

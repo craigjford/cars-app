@@ -1,14 +1,17 @@
-import React from "react";
 
-function Repair({ repair, handleDelete, handleUpdate }) {
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+function Repair({ repair, handleDelete }) {
+
+  const navigate = useNavigate();
 
   const repairDelete = (repair) => {
     handleDelete(repair);
   }
 
   const repairUpdate = (repair) => {
-    debugger
-    handleUpdate(repair);
+    navigate(`/cars/${repair.car_id}/repairs/${repair.id}/edit`)
   }
 
   return (
@@ -16,9 +19,12 @@ function Repair({ repair, handleDelete, handleUpdate }) {
         <h3>Garage Name: {repair.shop_name}</h3>
         <h3>Repair Cost: {repair.cost}</h3>
         <h3>Service Description: {repair.service_desc}</h3>
+        <br />
         <button type="button" onClick={() => repairDelete(repair)}>Delete Repair</button>
         <br />
         <button type="button" onClick={() => repairUpdate(repair)}>Update Repair</button>
+        <br />
+        <br />
         <hr />
     </div>
   );

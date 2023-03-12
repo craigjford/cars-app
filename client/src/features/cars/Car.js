@@ -20,6 +20,7 @@ function Car({ car }) {
               <button className="submit-btn">Car Details</button>
         </Link>
         <br />
+        <br />
         <hr />
      </div>
    )

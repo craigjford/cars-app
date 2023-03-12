@@ -3,7 +3,7 @@ import { useSelector, useDispatch  } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { carAdded } from "./carsSlice";
 
-function CarInput() {
+function CarInput({ handleCarInput }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
         dealer_id: "",
@@ -49,6 +49,7 @@ function CarInput() {
                 res.json().then(data => {
                     dispatch(carAdded(data))
                     initializeFormfields()
+                    handleCarInput()
                 }) 
             } else {
                 res.json().then(err => setErrors(err.errors))
@@ -84,7 +85,7 @@ function CarInput() {
                 <input type="text" id="model" name="model" value={formData.model} onChange={handleChange} />
                 <br />
                 <br />
-                <button type="submit">Submit</button>
+                <button type="submit" className="submit-btn">Submit</button>
             </form>
             <br />
             <br />

@@ -6,10 +6,9 @@ import LogIn from "./LogIn";
 import UserSignUpForm from "./UserSignUpForm";
 import Dealers from "./features/dealers/Dealers";
 import MyDealers from "./features/mydealers/MyDealers";
-import CarInput from "./features/cars/CarInput";
 import Cars from "./features/cars/Cars";
 import CarDetails from "./features/cars/CarDetails";
-import RepairInput from "./features/repairs/RepairInput";
+import RepairUpdate from "./features/repairs/RepairUpdate";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDealers } from "./features/dealers/dealersSlice";
 import { fetchCars } from "./features/cars/carsSlice";
@@ -62,13 +61,10 @@ function App() {
             <Route path="/dealers" element={<Dealers />} />
             <Route path="/mycars" element={<Cars />} />  
             <Route path="/cars/:car_id/edits" element={<CarDetails /> } />
-            <Route path="/cars/new" element={<CarInput />} />
-            <Route path="/cars/:car_id/repairs/new" element={<RepairInput />} />
+            {/* <Route path="/cars/new" element={<CarInput />} /> */}
+            <Route path="/cars/:car_id/repairs/:repair_id/edit" element={<RepairUpdate />} /> 
             {/* <Route exact path="/alldealers" component={AllDealers} />
             <Route path="/dealers/new" component={AllDealerForm} />
-            <Route exact path="/transactions" component={TransactionAll} />
-            <Route exact path="/transactions/new" component={TransactionForm} />
-            <Route path="/dealers/:dealer_id/transactions/delete" component={TransactionDelete} />
             <Route path="/dealers/:dealer_id/transactions/edit" component={TransactionUpdate} /> */}
             {/* <Route path="*">
                 <h1>404 - Page Not Found</h1>

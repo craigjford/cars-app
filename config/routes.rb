@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get "/mycars", to: "cars#myindex"
     get "/mydealers", to: "dealers#myindex"
 
-    resources :repairs, only: [:create, :destroy]
+    resources :repairs, only: [:create, :destroy, :update]
     resources :cars, only: [:create]
     resources :dealers, only: [:index, :show, :create, :destroy]
 
