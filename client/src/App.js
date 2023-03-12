@@ -12,6 +12,7 @@ import RepairUpdate from "./features/repairs/RepairUpdate";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDealers } from "./features/dealers/dealersSlice";
 import { fetchCars } from "./features/cars/carsSlice";
+import { fetchmyDealers } from "./features/mydealers/mydealersSlice";
 import { userAdded } from "./features/user/userSlice";
 import './App.css';
 
@@ -33,6 +34,7 @@ function App() {
               dispatch(userAdded(user));
               dispatch(fetchDealers());
               dispatch(fetchCars());
+              dispatch(fetchmyDealers());
             })
         } else {
             res.json().then(error => {

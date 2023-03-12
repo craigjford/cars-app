@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MyDealer from "./MyDealer";
 import MyDealerInput from "./MyDealerInput";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
 function MyDealers() {
@@ -15,8 +15,9 @@ function MyDealers() {
 
   if (!loggedIn) {navigate('/')};
 
+
   const mydealers = useSelector((state) => state.mydealers.entities);
-  console.log('DEALERS = ', mydealers);
+  console.log('MYDEALERS = ', mydealers);
 
   const handleClick = () => {
     setAddingDealer(true);
