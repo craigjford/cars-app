@@ -19,7 +19,6 @@ const userSlice = createSlice({
       state.loggedIn = true;
     },
     userRemoved(state, action) {
-      console.log("in user Splicer removing user - action = ", action)
       let bId = true;
       while (bId) {
           const idx = state.entities.findIndex((review) => review.restaurantId === action.payload);

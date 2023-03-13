@@ -15,9 +15,8 @@ function MyDealers() {
 
   if (!loggedIn) {navigate('/')};
 
-
   const mydealers = useSelector((state) => state.mydealers.entities);
-  console.log('MYDEALERS = ', mydealers);
+  // console.log('MYDEALERS = ', mydealers);
 
   const handleClick = () => {
     setAddingDealer(true);

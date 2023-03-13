@@ -47,10 +47,14 @@ function App() {
   const userStatus = useSelector((state) => state.user.status)
   const dealerStatus = useSelector((state) => state.dealers.status);
   const carsStatus = useSelector((state) => state.cars.status);
+  const mydealersStatus = useSelector((state) => state.cars.status);
 
-  if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading") {
+  if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading" || mydealersStatus === "loading") {
       return <h1>Loading....</h1>
   }  
+
+  // used for invalid route
+  const isTrue = true;
 
   return (
     <>
@@ -58,7 +62,7 @@ function App() {
       <NavBar loggedIn={loggedIn} />
         {loggedIn ? (
           <Routes>
-            <Route exact="true" path="/" element={<Home />} />
+            <Route exact="true" path="/" element={<Home isHome={isTrue} />} />
             <Route path="/mydealers" element={<MyDealers />} />
             <Route path="/dealers" element={<Dealers />} />
             <Route path="/mycars" element={<Cars />} />  
@@ -68,17 +72,14 @@ function App() {
             {/* <Route exact path="/alldealers" component={AllDealers} />
             <Route path="/dealers/new" component={AllDealerForm} />
             <Route path="/dealers/:dealer_id/transactions/edit" component={TransactionUpdate} /> */}
-            {/* <Route path="*">
-                <h1>404 - Page Not Found</h1>
-                <img src="https://bashooka.com/wp-content/uploads/2012/06/404-error-page-template-1.jpg" alt="Not Found" />
-            </Route>   */}
+            <Route path="*" element={<Home patch="*" isHome={!isTrue}/>} />
           </Routes>
           ) : (  
           <Routes> 
-            <Route exact="true" path="/" element={<Home />} />
+            <Route exact="true" path="/" element={<Home isHome={isTrue} />} />
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<UserSignUpForm />} />
-            <Route path="*" element={<Home />} />
+            <Route path="*" element={<Home path="*" isHome={!isTrue} />} />
           </Routes>  
         )} 
       </main>

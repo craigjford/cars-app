@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { userReset } from "./features/user/userSlice";
 import { dealerReset } from "./features/dealers/dealersSlice";
 import { carReset } from "./features/cars/carsSlice";
+import { mydealerReset } from "./features/mydealers/mydealersSlice";
 
 const navStyles = ({ isActive }) => {
   return {  
@@ -30,6 +31,7 @@ function NavBar({ loggedIn }) {
         dispatch(userReset());
         dispatch(carReset());
         dispatch(dealerReset());
+        dispatch(mydealerReset());
         navigate('/');
       }
     });
