@@ -67,11 +67,7 @@ function App() {
             <Route path="/dealers" element={<Dealers />} />
             <Route path="/mycars" element={<Cars />} />  
             <Route path="/cars/:car_id/edits" element={<CarDetails /> } />
-            {/* <Route path="/cars/new" element={<CarInput />} /> */}
             <Route path="/cars/:car_id/repairs/:repair_id/edit" element={<RepairUpdate />} /> 
-            {/* <Route exact path="/alldealers" component={AllDealers} />
-            <Route path="/dealers/new" component={AllDealerForm} />
-            <Route path="/dealers/:dealer_id/transactions/edit" component={TransactionUpdate} /> */}
             <Route path="*" element={<Home patch="*" isHome={!isTrue}/>} />
           </Routes>
           ) : (  

@@ -16,7 +16,7 @@ function MyDealers() {
   if (!loggedIn) {navigate('/')};
 
   const mydealers = useSelector((state) => state.mydealers.entities);
-  // console.log('MYDEALERS = ', mydealers);
+  console.log('MYDEALERS = ', mydealers);
 
   const handleClick = () => {
     setAddingDealer(true);
@@ -24,7 +24,8 @@ function MyDealers() {
 
   return (
     <div className="App">
-      <h1>Dealers page</h1>
+      <h1><i><u>My Dealers</u></i></h1>
+
         {mydealers.map((mydealer) => <MyDealer key={mydealer.id} dealer={mydealer}/>)}
       <br />
       <br />

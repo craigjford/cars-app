@@ -16,7 +16,6 @@ function Dealers() {
   if (!loggedIn) {navigate('/')};
 
   const dealers = useSelector((state) => state.dealers.entities);
-  console.log('DEALERS = ', dealers);
 
   const handleClick = () => {
     setAddingDealer(true);
@@ -24,12 +23,12 @@ function Dealers() {
 
   return (
     <div className="App">
-      <h1>Dealers page</h1>
+      <h1><i><u>All Dealers</u></i></h1>
+      <br />
         {dealers.map((dealer) => <Dealer key={dealer.id} dealer={dealer}/>)}
       <br />
       <br />
       {addingDealer ? null : <button type="button" className="submit-btn" onClick={handleClick}>Add Dealer</button>}
-      <br />
       <br />
       <br />
       {addingDealer ? <DealerInput setAddingDealer={setAddingDealer} /> : null}

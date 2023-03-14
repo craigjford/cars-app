@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userAdded } from "./features/user/userSlice";
 import { fetchDealers } from "./features/dealers/dealersSlice";
 import { fetchCars } from "./features/cars/carsSlice";
+import { fetchmyDealers } from "./features/mydealers/mydealersSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -31,6 +32,7 @@ const Login = () => {
             dispatch(userAdded(user));
             dispatch(fetchDealers());
             dispatch(fetchCars());
+            dispatch(fetchmyDealers());
             setUsername("");
             setPassword("");
             navigate('/');
@@ -46,8 +48,9 @@ const Login = () => {
   const userStatus = useSelector((state) => state.user.status)
   const dealerStatus = useSelector((state) => state.dealers.status);
   const carsStatus = useSelector((state) => state.cars.status);
+  const mydealersStatus = useSelector((state) => state.cars.status);
 
-  if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading") {
+  if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading" || mydealersStatus === "loading") {
       return <h1>Loading....</h1>
   }  
 

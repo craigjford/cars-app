@@ -4,12 +4,13 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
     def myindex
         # current_user = User.find(1)
-        dealers = current_user.dealers.distinct
+        byebug
+        dealers = current_user.dealers.distinct.order(:name)
         render json: dealers, status: :ok
     end
     
     def index
-        dealers = Dealer.all   
+        dealers = Dealer.all.order(:name)   
         render json: dealers, each_serializer: DealerAllSerializer, status: :ok
     end
 

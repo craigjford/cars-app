@@ -20,7 +20,6 @@ const mydealersSlice = createSlice({
     mydealerReset(state) {
       state.entities.length = 0;
       state.status = "idle";
-      state.loggedIn = false;
     },
     // mydealerUpdated(state, action) {
     //   const mydealer = state.entities.find((mydealer) => mydealer.id === action.payload.id);

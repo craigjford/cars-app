@@ -24,7 +24,6 @@ const dealersSlice = createSlice({
     dealerReset(state) {
       state.entities.length = 0;
       state.status = "idle";
-      state.loggedIn = false;
     },
     // dealerUpdated(state, action) {
     //   const dealer = state.entities.find((dealer) => dealer.id === action.payload.id);

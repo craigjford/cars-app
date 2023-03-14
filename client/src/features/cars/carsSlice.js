@@ -36,23 +36,10 @@ const carsSlice = createSlice({
       })
       car.repairs = repairArr;
     },
-    // repairUpdated(state, action) {
-    //   const repair = state.entities.find((repair) => repair.id === action.payload.id);
-    //   repair.url = action.payload.url;
-    // },
     carReset(state) {
       state.entities.length = 0;
       state.status = "idle";
-      state.loggedIn = false;
     },
-    // repairAdded(state, action) {
-    //   const idx = state.entities.findIndex(action.payload.id);
-      
-    // },
-    // carUpdated(state, action) {
-    //   const car = state.entities.find((car) => car.id === action.payload.id);
-    //   car.url = action.payload.url;
-    // },
   },
   extraReducers: {
     // handle async actions: pending, fulfilled, rejected (for errors)

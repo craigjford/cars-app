@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from "react-redux";
 
 const Home = ({ isHome }) => {
-  console.log("isHome = ", isHome);
 
   const userArr = useSelector((state) => state.user.entities);
   const user = userArr[0];
