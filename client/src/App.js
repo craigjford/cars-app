@@ -9,11 +9,13 @@ import MyDealers from "./features/mydealers/MyDealers";
 import Cars from "./features/cars/Cars";
 import CarDetails from "./features/cars/CarDetails";
 import RepairUpdate from "./features/repairs/RepairUpdate";
+import Repairs from "./features/repairs/Repairs";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDealers } from "./features/dealers/dealersSlice";
 import { fetchCars } from "./features/cars/carsSlice";
 import { fetchmyDealers } from "./features/mydealers/mydealersSlice";
 import { userAdded } from "./features/user/userSlice";
+import { fetchRepairs } from "./features/repairs/repairsSlice";
 import './App.css';
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
               dispatch(fetchDealers());
               dispatch(fetchCars());
               dispatch(fetchmyDealers());
+              dispatch(fetchRepairs());
             })
         } else {
             res.json().then(error => {
@@ -48,8 +51,9 @@ function App() {
   const dealerStatus = useSelector((state) => state.dealers.status);
   const carsStatus = useSelector((state) => state.cars.status);
   const mydealersStatus = useSelector((state) => state.cars.status);
+  const repairsStatus = useSelector((state) => state.cars.status);
 
-  if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading" || mydealersStatus === "loading") {
+  if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading" || mydealersStatus === "loading" || repairsStatus === "loading") {
       return <h1>Loading....</h1>
   }  
 
@@ -68,6 +72,7 @@ function App() {
             <Route path="/mycars" element={<Cars />} />  
             <Route path="/cars/:car_id/edits" element={<CarDetails /> } />
             <Route path="/cars/:car_id/repairs/:repair_id/edit" element={<RepairUpdate />} /> 
+            <Route path="/repairs" element={<Repairs />} />
             <Route path="*" element={<Home patch="*" isHome={!isTrue}/>} />
           </Routes>
           ) : (  

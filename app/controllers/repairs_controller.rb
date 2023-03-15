@@ -2,6 +2,12 @@ class RepairsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
+    def index 
+        # current_user = User.find(1)
+        repairs = current_user.repairs
+        render json: repairs, each_serializer: RepairAllSerializer, status: :ok
+    end
+
     def create  
         repair = Repair.create!(repair_params)
         render json: repair, status: :created
