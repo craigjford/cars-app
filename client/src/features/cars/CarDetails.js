@@ -4,6 +4,7 @@ import RepairInput from "../repairs/RepairInput";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { carRepairRemoved } from "./carsSlice";
+import { repairRemoved } from '../repairs/repairsSlice';
 
 function CarDetails() {
   const [addingRepair, setAddingRepair] = useState(false);
@@ -21,14 +22,15 @@ function CarDetails() {
   const filteredCar = cars.filter((car) => car.id === parseInt(params.car_id))
   const car = filteredCar[0];
 
-  const handleDelete = (repair) => {
 
-    fetch(`/repairs/${repair.id}`, {
-        method: 'DELETE'
-    })
-    .then(dispatch(carRepairRemoved(repair)));
-    
-  }
+    const handleDelete = (repair) => {
+        fetch(`/repairs/${repair.id}`, {
+            method: 'DELETE'
+        })
+        .then
+            (dispatch(carRepairRemoved(repair)))
+            dispatch(repairRemoved(repair)) 
+      }  
 
   const repairsList = car.repairs.map((repair) => <Repair key={repair.id} repair={repair} handleDelete={handleDelete} />);
 
@@ -40,8 +42,9 @@ function CarDetails() {
     setAddingRepair(false);
   }
   
+
   return (
-    <div>
+    <div className="App">
         <h1><u><i>Car Details</i></u></h1>
         <h3>Year: {car.year}</h3>
         <h3>Make: {car.make}</h3>

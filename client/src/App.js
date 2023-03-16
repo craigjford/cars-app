@@ -9,6 +9,7 @@ import MyDealers from "./features/mydealers/MyDealers";
 import Cars from "./features/cars/Cars";
 import CarDetails from "./features/cars/CarDetails";
 import RepairUpdate from "./features/repairs/RepairUpdate";
+import RepairShow from "./features/repairs/RepairShow";
 import Repairs from "./features/repairs/Repairs";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDealers } from "./features/dealers/dealersSlice";
@@ -73,6 +74,7 @@ function App() {
             <Route path="/cars/:car_id/edits" element={<CarDetails /> } />
             <Route path="/cars/:car_id/repairs/:repair_id/edit" element={<RepairUpdate />} /> 
             <Route path="/repairs" element={<Repairs />} />
+            <Route path="/repairs/:repair_id/show" element={<RepairShow />} /> 
             <Route path="*" element={<Home patch="*" isHome={!isTrue}/>} />
           </Routes>
           ) : (  
