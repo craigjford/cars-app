@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 function Repairs() {
     const repairs = useSelector((state) => state.repairs.entities);
 
+    console.log('repair = ', repairs)
+
     const repairList = repairs.map((repair) => {
       return <RepairItem key={repair.id} repair={repair} />
     })
