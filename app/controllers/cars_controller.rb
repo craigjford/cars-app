@@ -15,6 +15,10 @@ class CarsController < ApplicationController
 
     private
 
+    def find_car
+        Car.find(params[:id])
+    end
+
     def car_params              
         params.permit(:user_id, :dealer_id, :year, :make, :model)
     end

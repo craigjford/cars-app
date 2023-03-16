@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     get "/mycars", to: "cars#myindex"
     get "/mydealers", to: "dealers#myindex"
 
-    resources :repairs, only: [:index, :create, :destroy, :update]
-    resources :cars, only: [:create]
+    resources :repairs, only: [:index, :show, :create, :destroy, :update]
+    resources :cars, only: [:index, :show, :create, :destroy, :update]
     resources :dealers, only: [:index, :show, :create, :destroy]
 
     # this route is used to retrieve dealers with associated transactions to the logged in user  

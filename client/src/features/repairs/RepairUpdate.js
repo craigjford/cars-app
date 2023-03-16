@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { carRepairUpdated } from "../cars/carsSlice";
+// import { repairUpdated } from "../repairs/repairsSlice";
 
 function RepairUpdate() {
     const [errors, setErrors] = useState([]);
@@ -40,6 +41,7 @@ function RepairUpdate() {
     }
 
     const handleSubmit = (e) => {
+        debugger
         e.preventDefault();
         fetch (`/repairs/${repairId}`, {
           method: "PATCH",
@@ -56,7 +58,10 @@ function RepairUpdate() {
         .then(res => {
             if (res.ok) {
                 res.json().then(data => {
+                    debugger
                     dispatch(carRepairUpdated(data))
+                    // dispatch(repairUpdated(data))
+                    debugger
                     navigate(`/cars/${car.id}/edits`)
                 }) 
             } else {

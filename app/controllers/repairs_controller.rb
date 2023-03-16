@@ -3,9 +3,13 @@ class RepairsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
     def index 
-        # current_user = User.find(1)
         repairs = current_user.repairs
         render json: repairs, each_serializer: RepairAllSerializer, status: :ok
+    end
+
+    def show
+        repair = Repair.find(params[:id])
+        render json: repair, serializer: RepairAllSerializer, status: :ok
     end
 
     def create  
@@ -30,7 +34,7 @@ class RepairsController < ApplicationController
     def find_repair
         Repair.find(params[:id])
     end
-
+    
     def repair_params              
         params.permit(:car_id, :shop_name, :cost, :service_desc)
     end

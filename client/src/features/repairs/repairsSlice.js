@@ -20,15 +20,15 @@ const repairsSlice = createSlice({
       const idx = state.entities.findIndex((repair) => repair.id === action.payload.id);
       state.entities.splice(idx, 1)
     },
-    repairUpdated(state, action) {
-      state.entities.map((repair) => {
-          if (repair.id === action.payload.id) {
-            return action.payload;
-          } else {
-            return repair;
-          }
-      })
-    },
+    // repairUpdated(state, action) {
+    //   state.entities.map((repair) => {
+    //       if (repair.id === action.payload.id) {
+    //         return action.payload;
+    //       } else {
+    //         return repair;
+    //       }
+    //   })
+    // },
   },
   extraReducers: {
     // handle async actions: pending, fulfilled, rejected (for errors)
@@ -42,6 +42,6 @@ const repairsSlice = createSlice({
   },
 });
 
-export const { repairAdded,repairRemoved, repairUpdated } = repairsSlice.actions;
+export const { repairAdded,repairRemoved } = repairsSlice.actions;
 
 export default repairsSlice.reducer;

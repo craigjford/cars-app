@@ -61,7 +61,7 @@ function RepairShow() {
             <h3>Service Description: {repairData.service_desc}</h3>
             <br />
             <br />
-            <button type="button" className="submit-btn" onClick={handleCancel}>Cancel</button>
+            <button type="button" className="submit-btn" onClick={handleCancel}>Back</button>
             <br />
             <br />
             {errors ? errors.map(e => <li style={{color:'red'}} key={e}>{e}</li>) : ""}
