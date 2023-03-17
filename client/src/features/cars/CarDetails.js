@@ -22,20 +22,23 @@ function CarDetails() {
   const filteredCar = cars.filter((car) => car.id === parseInt(params.car_id))
   const car = filteredCar[0];
 
-
-    const handleDelete = (repair) => {
-        fetch(`/repairs/${repair.id}`, {
-            method: 'DELETE'
-        })
-        .then
-            (dispatch(carRepairRemoved(repair)))
-            dispatch(repairRemoved(repair)) 
-      }  
+  const handleDelete = (repair) => {
+      fetch(`/repairs/${repair.id}`, {
+          method: 'DELETE'
+      })
+      .then
+          (dispatch(carRepairRemoved(repair)))
+          dispatch(repairRemoved(repair)) 
+  }  
 
   const repairsList = car.repairs.map((repair) => <Repair key={repair.id} repair={repair} handleDelete={handleDelete} />);
 
   const handleClick = () => {
     setAddingRepair(true);
+  }
+
+  const handleCancel = () => {
+    navigate(-1);
   }
 
   const handleRepairSubmit = () => {
@@ -58,10 +61,11 @@ function CarDetails() {
             {repairsList.length > 0 ? repairsList : <h3>No Repairs Exist</h3>}
         <br />
             {addingRepair ? null : <button type="button" className="submit-btn" onClick={handleClick}>Add Repair</button>}
+            {addingRepair ? null : <button type="button" className="submit-btn" onClick={handleCancel}>Cancel</button>}
         <br />
         <br />
         <br />
-            {addingRepair ? <RepairInput carId={car.id} handleRepairSubmit={handleRepairSubmit} /> : null}
+            {addingRepair ? <RepairInput car={car} handleRepairSubmit={handleRepairSubmit} /> : null}
      </div>
    )
  }

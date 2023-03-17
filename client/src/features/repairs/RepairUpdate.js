@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { carRepairUpdated } from "../cars/carsSlice";
-// import { repairUpdated } from "../repairs/repairsSlice";
+import { repairUpdated } from "../repairs/repairsSlice";
 
 function RepairUpdate() {
     const [errors, setErrors] = useState([]);
@@ -39,11 +39,11 @@ function RepairUpdate() {
     const dispatch = useDispatch();
 
     const handleCancel = () => {
-        navigate(`/cars/${car.id}/edits`)
+        // navigate(`/cars/${car.id}/edits`)
+        navigate(-1);
     }
 
     const handleSubmit = (e) => {
-        debugger
         e.preventDefault();
         fetch (`/repairs/${repairId}`, {
           method: "PATCH",
@@ -60,11 +60,12 @@ function RepairUpdate() {
         .then(res => {
             if (res.ok) {
                 res.json().then(data => {
-                    debugger
                     dispatch(carRepairUpdated(data))
-                    // dispatch(repairUpdated(data))
-                    debugger
-                    navigate(`/cars/${car.id}/edits`)
+                    const repairObj =({...data, car: {id: car.id, user_id: car.user_id, dealer_id: car.dealer_id,
+                                  year: car.year, make: car.make, model: car.model}})
+                    dispatch(repairUpdated(repairObj)) 
+                    // navigate(`/cars/${car.id}/edits`)
+                    navigate(-1);
                 }) 
             } else {
                 res.json().then(err => setErrors(err.errors))

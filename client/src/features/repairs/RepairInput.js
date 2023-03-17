@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { carRepairAdded } from "../cars/carsSlice";
+import { repairAdded } from "./repairsSlice";
 
-function RepairInput({ carId, handleRepairSubmit }) {
+function RepairInput({ car, handleRepairSubmit }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
         shop_name: "",
         cost: "",
         service_desc: ""
-    })
+    });
+
+    console.log("car = ", car);
+    const carObj = {id: car.id, user_id: car.user_id, dealer_id: car.dealer_id, year: car.year, make: car.make, model: car.model};
+    console.log(("carObj = ", carObj))
 
     const loggedIn = useSelector((state) => state.user.loggedIn);
 
@@ -36,13 +41,16 @@ function RepairInput({ carId, handleRepairSubmit }) {
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify({ 
           ...formData,
-          car_id: carId
+          car_id: car.id
       }),
       })
       .then((res) => {
       if (res.ok) {
           res.json().then((data) => {
               dispatch(carRepairAdded(data))
+              const repairObj =({...data, car: {id: car.id, user_id: car.user_id, dealer_id: car.dealer_id,
+                            year: car.year, make: car.make, model: car.model}})
+              dispatch(repairAdded(repairObj));             
               initializeFormfields();
               handleRepairSubmit();
               setErrors([])
