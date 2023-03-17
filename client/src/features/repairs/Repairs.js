@@ -1,10 +1,14 @@
 import React from 'react';
-import RepairItem from "./RepairItem";
-
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import RepairItem from "./RepairItem";
 
 function Repairs() {
     const repairs = useSelector((state) => state.repairs.entities);
+    const loggedIn = useSelector((state) => state.user.loggedIn);
+
+    const navigate = useNavigate();
+    if (!loggedIn) {navigate('/')};
 
     console.log('repair = ', repairs)
 

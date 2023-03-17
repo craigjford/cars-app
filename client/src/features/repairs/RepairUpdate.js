@@ -12,6 +12,9 @@ function RepairUpdate() {
     const [stateInitialized, setStateInitialized] = useState(false);
 
     const loggedIn = useSelector((state) => state.user.loggedIn);
+    const navigate = useNavigate();
+    if (!loggedIn) {navigate('/')};
+
     const cars = useSelector((state) => state.cars.entities);
 
     const params = useParams();
@@ -34,7 +37,6 @@ function RepairUpdate() {
     }
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const handleCancel = () => {
         navigate(`/cars/${car.id}/edits`)
@@ -69,8 +71,6 @@ function RepairUpdate() {
             }
         })
     }
-
-    if (!loggedIn) {navigate('/')};
 
   return (
         <div>  

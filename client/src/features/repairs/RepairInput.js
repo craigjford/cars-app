@@ -15,6 +15,7 @@ function RepairInput({ carId, handleRepairSubmit }) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    if (!loggedIn) {navigate('/')};
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -62,8 +63,6 @@ function RepairInput({ carId, handleRepairSubmit }) {
     }
     setFormData(clearInput);
   }
-
-  if (!loggedIn) {navigate('/')};
 
   return (
     <div>

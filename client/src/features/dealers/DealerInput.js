@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { dealerAdded } from "./dealersSlice";
 
 function DealerInput({ setAddingDealer }) {
@@ -12,6 +13,9 @@ function DealerInput({ setAddingDealer }) {
     })
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const loggedIn = useSelector((state) => state.user.loggedIn);
+    if (!loggedIn) {navigate('/')};
 
     const handleChange = (e) => {
         const name = e.target.name
