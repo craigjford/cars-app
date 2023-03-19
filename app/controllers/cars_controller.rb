@@ -13,6 +13,18 @@ class CarsController < ApplicationController
         render json: car, status: :created
     end
 
+    def destroy  
+        car = find_car
+        car.destroy
+        head :no_content
+    end
+
+    def update  
+        car = find_car
+        car.update!(car_params)
+        render json: car, status: :ok
+    end
+
     private
 
     def find_car

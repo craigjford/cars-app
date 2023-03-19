@@ -10,8 +10,6 @@ function Repairs() {
     const navigate = useNavigate();
     if (!loggedIn) {navigate('/')};
 
-    console.log('repair = ', repairs)
-
     const repairList = repairs.map((repair) => {
       return <RepairItem key={repair.id} repair={repair} />
     })

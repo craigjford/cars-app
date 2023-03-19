@@ -30,6 +30,11 @@ const repairsSlice = createSlice({
       })
       state.entities = updtArr;
     },
+    repairCarRemoved(state, action) {
+      // console.log("action.payload  = ", action.payload);
+      const repairArr = state.entities.filter((repair) => repair.car_id !== action.payload.id);
+      state.entities = repairArr;
+    },
   },
   extraReducers: {
     // handle async actions: pending, fulfilled, rejected (for errors)
@@ -43,6 +48,6 @@ const repairsSlice = createSlice({
   },
 });
 
-export const { repairAdded,repairRemoved, repairUpdated } = repairsSlice.actions;
+export const { repairAdded, repairRemoved, repairUpdated, repairCarRemoved } = repairsSlice.actions;
 
 export default repairsSlice.reducer;

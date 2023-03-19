@@ -9,12 +9,16 @@ export const fetchCars = createAsyncThunk("cars/fetchCars", () => {
 const carsSlice = createSlice({
   name: "cars",
   initialState: {
-    entities: [], // array of cars
+    entities: [], 
     status: "idle", // loading state
   },
   reducers: {
     carAdded(state, action) {
       state.entities.push(action.payload);
+    },
+    carRemoved(state, action) {
+      const idx = state.entities.findIndex((car) => car.id === action.payload.id);
+      state.entities.splice(idx, 1);
     },
     carRepairAdded(state, action) {
       const car = state.entities.find((car) => car.id === action.payload.car_id);
@@ -53,6 +57,6 @@ const carsSlice = createSlice({
   },
 });
 
-export const { carAdded, carRepairAdded, carRepairRemoved, carRepairUpdated, carReset } = carsSlice.actions;
+export const { carAdded, carRemoved, carRepairAdded, carRepairRemoved, carRepairUpdated, carReset } = carsSlice.actions;
 
 export default carsSlice.reducer;

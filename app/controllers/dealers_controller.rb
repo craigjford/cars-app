@@ -13,20 +13,20 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
         render json: dealers, each_serializer: DealerAllSerializer, status: :ok
     end
 
-    def show 
-        dealer = Dealers.find(params[:id])
-        render json: dealer
-    end
+    # def show 
+    #     dealer = Dealers.find(params[:id])
+    #     render json: dealer
+    # end
 
     def create
         dealer = Dealer.create!(dealer_params)
         render json: dealer, status: :created
     end
 
-    def destroy
-        dealer = Dealer.find(params[:id])
-        dealer.destroy
-    end
+    # def destroy
+    #     dealer = Dealer.find(params[:id])
+    #     dealer.destroy
+    # end
 
     private
 

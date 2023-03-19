@@ -13,6 +13,8 @@ function Cars() {
   if (!loggedIn) {navigate('/')};
 
   const cars = useSelector((state) => state.cars.entities);
+  const dealers = useSelector((state) => state.mydealers.entities);
+  console.log("dealers = ", dealers);
 
   const handleClick = () => {
     setAddingCar(true);

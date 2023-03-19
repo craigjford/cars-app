@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch  } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { carAdded } from "./carsSlice";
+import { mydealerCarAdded } from "../mydealers/mydealersSlice";
 
 function CarInput({ handleCarInput }) {
     const [errors, setErrors] = useState([]);
@@ -48,6 +49,10 @@ function CarInput({ handleCarInput }) {
             if (res.ok) {
                 res.json().then(data => {
                     dispatch(carAdded(data))
+                    const myDealerObj =({id: data.dealer.id, name:data.dealer.name, contact: data.dealer.contact, phone: data.dealer.phone, 
+                        email: data.dealer.email, car: {id: data.id, user_id: data.user_id, dealer_id: data.dealer_id,
+                        year: data.year, make: data.make, model: data.model}})
+                    dispatch(mydealerCarAdded(myDealerObj))    
                     initializeFormfields()
                     handleCarInput()
                 }) 
