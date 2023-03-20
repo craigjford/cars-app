@@ -20,6 +20,10 @@ const carsSlice = createSlice({
       const idx = state.entities.findIndex((car) => car.id === action.payload.id);
       state.entities.splice(idx, 1);
     },
+    carUpdated(state, action) {
+      const idx = state.entities.findIndex((car) => car.id === action.payload.id);
+      state.entities[idx] = action.payload;
+    },
     carRepairAdded(state, action) {
       const car = state.entities.find((car) => car.id === action.payload.car_id);
       car.repairs.push(action.payload);
@@ -57,6 +61,6 @@ const carsSlice = createSlice({
   },
 });
 
-export const { carAdded, carRemoved, carRepairAdded, carRepairRemoved, carRepairUpdated, carReset } = carsSlice.actions;
+export const { carAdded, carRemoved, carUpdated, carRepairAdded, carRepairRemoved, carRepairUpdated, carReset } = carsSlice.actions;
 
 export default carsSlice.reducer;

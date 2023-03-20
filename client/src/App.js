@@ -8,6 +8,7 @@ import Dealers from "./features/dealers/Dealers";
 import MyDealers from "./features/mydealers/MyDealers";
 import Cars from "./features/cars/Cars";
 import CarDetails from "./features/cars/CarDetails";
+import CarUpdate from "./features/cars/CarUpdate";
 import RepairUpdate from "./features/repairs/RepairUpdate";
 import RepairShow from "./features/repairs/RepairShow";
 import Repairs from "./features/repairs/Repairs";
@@ -71,7 +72,8 @@ function App() {
             <Route path="/mydealers" element={<MyDealers />} />
             <Route path="/dealers" element={<Dealers />} />
             <Route path="/mycars" element={<Cars />} />  
-            <Route path="/cars/:car_id/edits" element={<CarDetails /> } />
+            <Route path="/cars/:car_id" element={<CarDetails /> } />
+            <Route path="/cars/:car_id/edits" element={<CarUpdate /> } />
             <Route path="/cars/:car_id/repairs/:repair_id/edit" element={<RepairUpdate />} /> 
             <Route path="/repairs" element={<Repairs />} />
             <Route path="/repairs/:repair_id/show" element={<RepairShow />} /> 

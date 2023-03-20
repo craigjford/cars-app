@@ -7,18 +7,20 @@ import { mydealerCarAdded } from "../mydealers/mydealersSlice";
 function CarInput({ handleCarInput }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
-        dealer_id: "",
+        dealer_id: 1,
         year: "",
         make: "", 
         model: ""
     })
 
     const loggedIn = useSelector((state) => state.user.loggedIn);
-    const dealers = useSelector((state) => state.dealers.entities);
+    const navigate = useNavigate();
+
     const userArr = useSelector((state) => state.user.entities);
     const user = userArr[0];
 
-    const navigate = useNavigate();
+    const dealers = useSelector((state) => state.dealers.entities);
+
     const dispatch = useDispatch();
   
     if (!loggedIn) {navigate('/')};
@@ -37,6 +39,7 @@ function CarInput({ handleCarInput }) {
     } 
 
     const handleSubmit = (e) => {
+        debugger
         e.preventDefault();
         fetch ("/cars", {
           method: "POST",
@@ -53,7 +56,6 @@ function CarInput({ handleCarInput }) {
                         email: data.dealer.email, car: {id: data.id, user_id: data.user_id, dealer_id: data.dealer_id,
                         year: data.year, make: data.make, model: data.model}})
                     dispatch(mydealerCarAdded(myDealerObj))    
-                    initializeFormfields()
                     handleCarInput()
                 }) 
             } else {
@@ -62,21 +64,11 @@ function CarInput({ handleCarInput }) {
         })
     }
       
-    const initializeFormfields = () => { 
-        const clearInput = {
-            dealer_id: "",
-            year: "",
-            make: "", 
-            model: ""
-        }
-        setFormData(clearInput);
-    }
-
   return (
         <div>    
             <form onSubmit={handleSubmit}>
                 <label>Dealer: </label>
-                <select id="dealers" name="dealer_id" onChange={handleChange}>
+                <select id="dealers" name="dealer_id" value={formData.dealer_id} onChange={handleChange}>
                     {dealerList}
                 </select>    
                 <br />
