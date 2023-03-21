@@ -34,6 +34,26 @@ const mydealersSlice = createSlice({
         state.entities[dealerIdx].cars.splice(carIdx, 1); 
       }
     },
+    mydealerCarUpdated(state, action) {
+      debugger
+      let carNotFound = true;
+      let ctr = 0;
+      while (carNotFound) {
+        const carIdx = state.entities[ctr].cars.findIndex((car) => car.id === action.payload.car.id);
+        if (carIdx > -1) {
+            debugger
+            carNotFound = false
+        }
+      }
+      state.entities[ctr] = action.payload;
+      // const dealerIdx = state.entities.findIndex((dealer) => dealer.id === action.payload.dealer_id);
+      // const carIdx = state.entities[dealerIdx].cars.findIndex((car) => car.id === action.payload.id);
+      // if (carIdx > -1 && state.entities[dealerIdx].cars.length === 1) {
+      //   state.entities.splice(dealerIdx, 1);
+      // } else {
+      //   state.entities[dealerIdx].cars.splice(carIdx, 1); 
+      // }
+    },
     mydealerReset(state) {
       state.entities.length = 0;
       state.status = "idle";
@@ -55,6 +75,6 @@ const mydealersSlice = createSlice({
   },
 });
 
-export const { mydealerAdded, mydealerReset, mydealerCarAdded, mydealerCarRemoved } = mydealersSlice.actions;
+export const { mydealerAdded, mydealerReset, mydealerCarAdded, mydealerCarRemoved, mydealerCarUpdated } = mydealersSlice.actions;
 
 export default mydealersSlice.reducer;

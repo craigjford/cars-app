@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch  } from "react-redux";
 import { useNavigate,  useParams } from "react-router-dom";
 import { carUpdated } from "./carsSlice";
-// import { mydealerCarUpdated } from "../mydealers/mydealersSlice";
+import { repairCarUpdated } from "../repairs/repairsSlice";
+import { mydealerCarUpdated } from "../mydealers/mydealersSlice";
 
 function CarUpdate() {
     const [initializeState, setInitializeState] = useState(true);
@@ -38,7 +39,6 @@ function CarUpdate() {
 
     const dealerList = dealers.map((dealer) => (
         <option key={dealer.id} value={dealer.id}>{dealer.name}</option>
-        // <option key={dealer.id} { dealer.id === dealerId ? selected : null} value={dealer.id}>{dealer.name}</option>
     ))
 
     const handleCancel = () => {
@@ -64,13 +64,15 @@ function CarUpdate() {
         .then(res => {
             if (res.ok) {
                 res.json().then(data => {
-                    console.log('in CarUpdate - data = ', data)
-                    debugger
                     dispatch(carUpdated(data))
-                    // const myDealerObj =({id: data.dealer.id, name:data.dealer.name, contact: data.dealer.contact, phone: data.dealer.phone, 
-                    //     email: data.dealer.email, car: {id: data.id, user_id: data.user_id, dealer_id: data.dealer_id,
-                    //     year: data.year, make: data.make, model: data.model}})
-                    // dispatch(mydealerCarAdded(myDealerObj))    
+                    const carObj = {id: data.id, user_id: data.user_id, dealer_id: data.dealer_id, year: 
+                        data.year, make: data.make, model: data.model}   
+                    dispatch(repairCarUpdated(carObj))
+                    const myDealerObj =({id: data.dealer.id, name:data.dealer.name, contact: data.dealer.contact, phone: data.dealer.phone, 
+                        email: data.dealer.email, car: {id: data.id, user_id: data.user_id, dealer_id: data.dealer_id,
+                        year: data.year, make: data.make, model: data.model}})
+                    debugger    
+                    dispatch(mydealerCarUpdated(myDealerObj))    
                     navigate(-1);
                 }) 
             } else {

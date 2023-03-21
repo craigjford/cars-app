@@ -7,7 +7,7 @@ import { mydealerCarAdded } from "../mydealers/mydealersSlice";
 function CarInput({ handleCarInput }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
-        dealer_id: 1,
+        dealer_id: "",
         year: "",
         make: "", 
         model: ""
@@ -29,6 +29,11 @@ function CarInput({ handleCarInput }) {
         <option key={dealer.id} value={dealer.id}>{dealer.name}</option>
     ))
 
+    const dlr = dealerList[0];
+    if (formData.dealer_id === "") {
+        setFormData({...formData, dealer_id: parseInt(dlr.key)});
+    }
+
     const handleChange = (e) => {
         const name = e.target.name
         if (e.target.name === "dealer_id") {
@@ -39,7 +44,6 @@ function CarInput({ handleCarInput }) {
     } 
 
     const handleSubmit = (e) => {
-        debugger
         e.preventDefault();
         fetch ("/cars", {
           method: "POST",

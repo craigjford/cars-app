@@ -17,7 +17,7 @@ function Repairs() {
   return (
     <div className="App">
       <h1><u><i>My Repairs</i></u></h1>
-        {repairList}
+        {repairList.length > 0 ? repairList : <h3>You Have No Repairs</h3>}
     </div>
   )
 }

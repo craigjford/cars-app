@@ -21,9 +21,16 @@ const carsSlice = createSlice({
       state.entities.splice(idx, 1);
     },
     carUpdated(state, action) {
-      const idx = state.entities.findIndex((car) => car.id === action.payload.id);
-      state.entities[idx] = action.payload;
-    },
+      debugger
+      const carArr = state.entities.map((car) => {
+        if(car.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return car;
+        }
+      })
+      state.entities = carArr;
+    }, 
     carRepairAdded(state, action) {
       const car = state.entities.find((car) => car.id === action.payload.car_id);
       car.repairs.push(action.payload);

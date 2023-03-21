@@ -17,6 +17,8 @@ function MyDealers() {
 
   const mydealers = useSelector((state) => state.mydealers.entities);
 
+  const dealerList = mydealers.map((mydealer) => <MyDealer key={mydealer.id} dealer={mydealer}/>)
+
   const handleClick = () => {
     setAddingDealer(true);
   }
@@ -24,7 +26,7 @@ function MyDealers() {
   return (
     <div className="App">
       <h1><i><u>My Dealers</u></i></h1>
-        {mydealers.map((mydealer) => <MyDealer key={mydealer.id} dealer={mydealer}/>)}
+        {dealerList.length > 0 ? dealerList : <h3>You Have No Cars Or Dealers</h3>}
       <br />
       <br />
       {addingDealer ? null : <button type="button" className="submit-btn" onClick={handleClick}>Add Dealer</button>}

@@ -31,8 +31,19 @@ const repairsSlice = createSlice({
       state.entities = updtArr;
     },
     repairCarRemoved(state, action) {
-      // console.log("action.payload  = ", action.payload);
       const repairArr = state.entities.filter((repair) => repair.car_id !== action.payload.id);
+      state.entities = repairArr;
+    },
+    repairCarUpdated(state, action) {
+      debugger
+      const repairArr = state.entities.map((repair) => {
+          if (repair.car_id === action.payload.id) {
+            repair = {...repair, car: action.payload}
+            return repair
+          } else {
+            return repair;
+          }
+      })
       state.entities = repairArr;
     },
   },
@@ -48,6 +59,6 @@ const repairsSlice = createSlice({
   },
 });
 
-export const { repairAdded, repairRemoved, repairUpdated, repairCarRemoved } = repairsSlice.actions;
+export const { repairAdded, repairRemoved, repairUpdated, repairCarRemoved, repairCarUpdated } = repairsSlice.actions;
 
 export default repairsSlice.reducer;
