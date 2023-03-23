@@ -2,8 +2,17 @@ class DealersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
+    # def myindex
+        # current_user = User.find(1)
+        # user = current_user      
+        # dealers = current_user.dealers.distinct.order(:name)
+        # dealers = Dealer.find_by_sql(["Select * from dealer inner join cars on dealer.id = cars.dealer_id where user_id = ?", user.id])
+        # render json: dealers, each_serializer: DealerAllSerializer, status: :ok
+    #     render json: dealers, status: :ok
+    # end
+
     def myindex
-        # current_user = User.find(4)
+        current_user = User.find(1)
         dealers = current_user.dealers.distinct.order(:name)
         render json: dealers, status: :ok
     end
@@ -13,29 +22,15 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
         render json: dealers, each_serializer: DealerAllSerializer, status: :ok
     end
 
-    # def show 
-    #     dealer = Dealers.find(params[:id])
-    #     render json: dealer
-    # end
-
     def create
         dealer = Dealer.create!(dealer_params)
         render json: dealer, status: :created
     end
 
-    # def destroy
-    #     dealer = Dealer.find(params[:id])
-    #     dealer.destroy
-    # end
-
     private
 
     def dealer_params 
         params.permit(:name, :contact, :phone, :email)
-    end
-
-    def find_dealer
-        current_user.dealers.find(params[:id])
     end
 
     def render_not_found(error)

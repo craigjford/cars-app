@@ -9,8 +9,8 @@ function MyDealer({ dealer }) {
   const loggedIn = useSelector((state) => state.user.loggedIn);
   if (!loggedIn) {navigate('/')};
 
-  const carsList = dealer.cars.map((car) => {
-    return <h3 key={car.id}>Car: {car.year} {car.make} {car.model}</h3>
+  const carsList = dealer.cars.map((c) => {
+    return <h3 key={c.id}>Car: {c.year} {c.make} {c.model}</h3>
   })
 
   return (
@@ -20,7 +20,7 @@ function MyDealer({ dealer }) {
         <h3>Contact: {dealer.contact}</h3>
         <h3>Phone: {dealer.phone}</h3>
         <h3>Email: {dealer.email}</h3>
-        <h2><i><u>My Cars</u></i></h2>
+        <h2><b><i><u>My Cars</u></i></b></h2>
             {carsList}
         <br />
         <hr />

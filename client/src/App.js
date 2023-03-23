@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchDealers } from "./features/dealers/dealersSlice";
 import { fetchCars } from "./features/cars/carsSlice";
 import { fetchmyDealers } from "./features/mydealers/mydealersSlice";
+// import { mydealerInitialized  } from "./features/mydealers/mydealersSlice";
 import { userAdded } from "./features/user/userSlice";
 import { fetchRepairs } from "./features/repairs/repairsSlice";
 import './App.css';
@@ -36,10 +37,11 @@ function App() {
         if(res.ok) {
             res.json().then(user => {
               dispatch(userAdded(user));
+              dispatch(fetchmyDealers());
               dispatch(fetchDealers());
               dispatch(fetchCars());
-              dispatch(fetchmyDealers());
               dispatch(fetchRepairs());
+              // dispatch(mydealerInitialized(user.id));
             })
         } else {
             res.json().then(error => {
@@ -52,8 +54,8 @@ function App() {
   const userStatus = useSelector((state) => state.user.status)
   const dealerStatus = useSelector((state) => state.dealers.status);
   const carsStatus = useSelector((state) => state.cars.status);
-  const mydealersStatus = useSelector((state) => state.cars.status);
-  const repairsStatus = useSelector((state) => state.cars.status);
+  const mydealersStatus = useSelector((state) => state.mydealers.status);
+  const repairsStatus = useSelector((state) => state.repairs.status);
 
   if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading" || mydealersStatus === "loading" || repairsStatus === "loading") {
       return <h1>Loading....</h1>

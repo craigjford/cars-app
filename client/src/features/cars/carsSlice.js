@@ -21,7 +21,6 @@ const carsSlice = createSlice({
       state.entities.splice(idx, 1);
     },
     carUpdated(state, action) {
-      debugger
       const carArr = state.entities.map((car) => {
         if(car.id === action.payload.id) {
           return action.payload;

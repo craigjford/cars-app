@@ -5,6 +5,8 @@ import { userAdded } from "./features/user/userSlice";
 import { fetchDealers } from "./features/dealers/dealersSlice";
 import { fetchCars } from "./features/cars/carsSlice";
 import { fetchmyDealers } from "./features/mydealers/mydealersSlice";
+import { fetchRepairs } from "./features/repairs/repairsSlice";
+// import { mydealerInitialized } from "./features/mydealers/mydealersSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -30,9 +32,11 @@ const Login = () => {
       if (res.ok) {
           res.json().then(user => {
             dispatch(userAdded(user));
+            dispatch(fetchmyDealers());
             dispatch(fetchDealers());
             dispatch(fetchCars());
-            dispatch(fetchmyDealers());
+            dispatch(fetchRepairs());
+            // dispatch(mydealerInitialized(user.id));
             setUsername("");
             setPassword("");
             navigate('/');
@@ -48,11 +52,12 @@ const Login = () => {
   const userStatus = useSelector((state) => state.user.status)
   const dealerStatus = useSelector((state) => state.dealers.status);
   const carsStatus = useSelector((state) => state.cars.status);
-  const mydealersStatus = useSelector((state) => state.cars.status);
+  const mydealersStatus = useSelector((state) => state.mydealers.status);
+  const repairsStatus = useSelector((state) => state.repairs.status);
 
-  if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading" || mydealersStatus === "loading") {
-      return <h1>Loading....</h1>
-  }  
+  if (dealerStatus === "loading" || userStatus === "loading" || carsStatus === "loading" || mydealersStatus === "loading" || repairsStatus === "loading") {
+    return <h1>Loading....</h1>
+}  
 
   return (
     <div>

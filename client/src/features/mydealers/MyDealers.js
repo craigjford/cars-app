@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MyDealer from "./MyDealer";
-import MyDealerInput from "./MyDealerInput";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { mydealerInitialized  } from "./mydealersSlice";
 import { useNavigate } from 'react-router-dom';
 
 function MyDealers() {
-  const [addingDealer, setAddingDealer] = useState(false);
 
   // dealers with cars
 
   const navigate = useNavigate();
 
+  const userArr = useSelector((state) => state.user.entities);
+  const user = userArr[0];
   const loggedIn = useSelector((state) => state.user.loggedIn);
+
+  const dispatch = useDispatch();
+
+  dispatch(mydealerInitialized(user.id));
 
   if (!loggedIn) {navigate('/')};
 
@@ -19,21 +24,12 @@ function MyDealers() {
 
   const dealerList = mydealers.map((mydealer) => <MyDealer key={mydealer.id} dealer={mydealer}/>)
 
-  const handleClick = () => {
-    setAddingDealer(true);
-  }
-
   return (
     <div className="App">
       <h1><i><u>My Dealers</u></i></h1>
         {dealerList.length > 0 ? dealerList : <h3>You Have No Cars Or Dealers</h3>}
       <br />
       <br />
-      {addingDealer ? null : <button type="button" className="submit-btn" onClick={handleClick}>Add Dealer</button>}
-      <br />
-      <br />
-      <br />
-      {addingDealer ? <MyDealerInput setAddingDealer={setAddingDealer} /> : null}
     </div>
   )
 }

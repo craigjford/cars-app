@@ -33,7 +33,7 @@ function RepairItem({ repair }) {
             <h3>Shop Name: {repair.shop_name}</h3>
             <h3>Cost: {repair.cost}</h3>
             <h3>Service Description: {repair.service_desc}</h3>
-            <h3>Car: {repair.car.year} {repair.car.make} {repair.car.model}</h3>
+            <h3><i>Car: {repair.car.year} {repair.car.make} {repair.car.model}</i></h3>
             <br />
             <button type="button" className="any-btn" onClick={handleDelete}>Delete Repair</button>
             <button type="button" className="any-btn" onClick={() => repairUpdate(repair)}>Update Repair</button>

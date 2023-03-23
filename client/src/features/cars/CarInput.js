@@ -30,7 +30,7 @@ function CarInput({ handleCarInput }) {
     ))
 
     const dlr = dealerList[0];
-    if (formData.dealer_id === "") {
+    if (formData.dealer_id === "" && dealers.length > 0) {
         setFormData({...formData, dealer_id: parseInt(dlr.key)});
     }
 

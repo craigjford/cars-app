@@ -35,7 +35,6 @@ const repairsSlice = createSlice({
       state.entities = repairArr;
     },
     repairCarUpdated(state, action) {
-      debugger
       const repairArr = state.entities.map((repair) => {
           if (repair.car_id === action.payload.id) {
             repair = {...repair, car: action.payload}

@@ -13,8 +13,17 @@ const mydealersSlice = createSlice({
     status: "idle", // loading state
   },
   reducers: {
+    mydealerInitialized(state, action) {
+      let ctr = 0;
+      let arrLength = state.entities.length;
+      while (ctr < arrLength) {
+        let carArr = [];
+         carArr = state.entities[ctr].cars.filter((car) => car.user_id === action.payload)
+         state.entities[ctr].cars = carArr;
+        ctr = ctr + 1;
+      }
+    },
     mydealerAdded(state, action) {
-      // using createSlice lets us mutate state!
       state.entities.push(action.payload);
     },
     mydealerCarAdded(state, action) {
@@ -35,33 +44,20 @@ const mydealersSlice = createSlice({
       }
     },
     mydealerCarUpdated(state, action) {
-      debugger
       let carNotFound = true;
       let ctr = 0;
       while (carNotFound) {
         const carIdx = state.entities[ctr].cars.findIndex((car) => car.id === action.payload.car.id);
         if (carIdx > -1) {
-            debugger
             carNotFound = false
         }
       }
       state.entities[ctr] = action.payload;
-      // const dealerIdx = state.entities.findIndex((dealer) => dealer.id === action.payload.dealer_id);
-      // const carIdx = state.entities[dealerIdx].cars.findIndex((car) => car.id === action.payload.id);
-      // if (carIdx > -1 && state.entities[dealerIdx].cars.length === 1) {
-      //   state.entities.splice(dealerIdx, 1);
-      // } else {
-      //   state.entities[dealerIdx].cars.splice(carIdx, 1); 
-      // }
     },
     mydealerReset(state) {
       state.entities.length = 0;
       state.status = "idle";
     },
-    // mydealerUpdated(state, action) {
-    //   const mydealer = state.entities.find((mydealer) => mydealer.id === action.payload.id);
-    //   dealer.url = action.payload.url;
-    // },
   },
   extraReducers: {
     // handle async actions: pending, fulfilled, rejected (for errors)
@@ -75,6 +71,6 @@ const mydealersSlice = createSlice({
   },
 });
 
-export const { mydealerAdded, mydealerReset, mydealerCarAdded, mydealerCarRemoved, mydealerCarUpdated } = mydealersSlice.actions;
+export const { mydealerInitialized, mydealerAdded, mydealerReset, mydealerCarAdded, mydealerCarRemoved, mydealerCarUpdated } = mydealersSlice.actions;
 
 export default mydealersSlice.reducer;
