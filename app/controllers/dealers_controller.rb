@@ -13,9 +13,18 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
     def myindex
         current_user = User.find(1)
-        dealers = current_user.dealers.distinct.order(:name)
+        byebug
+        # dealers = Dealer.joins("INNER JOIN cars ON cars.dealer_id = dealers.id AND books.user_id = current_user.id")
+        dealers = Dealer.joins("INNER JOIN cars ON cars.dealer_id = dealers.id AND cars.user_id = 1")
         render json: dealers, status: :ok
     end
+
+
+    # def myindex
+    #     current_user = User.find(1)
+    #     dealers = current_user.dealers.distinct.order(:name)
+    #     render json: dealers, status: :ok
+    # end
     
     def index
         dealers = Dealer.all.order(:name)   

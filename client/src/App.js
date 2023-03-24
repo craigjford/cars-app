@@ -41,10 +41,12 @@ function App() {
               dispatch(fetchDealers());
               dispatch(fetchCars());
               dispatch(fetchRepairs());
+              debugger
               // dispatch(mydealerInitialized(user.id));
             })
         } else {
             res.json().then(error => {
+                debugger
                 console.log("/me error = ", error)
             })
         }   

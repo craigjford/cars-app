@@ -15,8 +15,7 @@ function Car({ car }) {
   if (!loggedIn) {navigate('/')};
 
   const handleDelete = () => {
-    // console.log('in delete car = ', car);
-    // debugger
+
     fetch(`/cars/${car.id}`, {
       method: "DELETE",
     }).then((res) => {

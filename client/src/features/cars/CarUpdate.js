@@ -46,7 +46,6 @@ function CarUpdate() {
     }
 
     const handleSubmit = (e) => {
-        debugger
         e.preventDefault();
         fetch (`/cars/${parseInt(params.car_id)}`, {
           method: "PATCH",
@@ -70,8 +69,8 @@ function CarUpdate() {
                     dispatch(repairCarUpdated(carObj))
                     const myDealerObj =({id: data.dealer.id, name:data.dealer.name, contact: data.dealer.contact, phone: data.dealer.phone, 
                         email: data.dealer.email, car: {id: data.id, user_id: data.user_id, dealer_id: data.dealer_id,
-                        year: data.year, make: data.make, model: data.model}})   
-                    dispatch(mydealerCarUpdated(myDealerObj))    
+                        year: data.year, make: data.make, model: data.model}})  
+                    dispatch(mydealerCarUpdated(myDealerObj))   
                     navigate(-1);
                 }) 
             } else {

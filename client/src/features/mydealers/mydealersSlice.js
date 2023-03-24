@@ -44,15 +44,49 @@ const mydealersSlice = createSlice({
       }
     },
     mydealerCarUpdated(state, action) {
+      const newdealerId = action.payload.id;
+      let oldDealerId = 0;
       let carNotFound = true;
       let ctr = 0;
+      let ctrHold = 0;
+      let carIdxHold = 0
+
+      // code finds where the car is in the array now
       while (carNotFound) {
         const carIdx = state.entities[ctr].cars.findIndex((car) => car.id === action.payload.car.id);
         if (carIdx > -1) {
-            carNotFound = false
-        }
+            carNotFound = false;
+            oldDealerId = state.entities[ctr].id;
+            ctrHold = ctr;
+            carIdxHold = carIdx;
+        } 
+        ctr = ctr + 1
       }
-      state.entities[ctr] = action.payload;
+      debugger
+      //if dealer did not change - just change new car object from old
+      console.log('newdealerId = ', newdealerId);
+      console.log('olddealerId = ', oldDealerId);
+      if (newdealerId === oldDealerId) {
+          const carIdx = state.entities[ctrHold].cars.findIndex((car) => car.id === action.payload.car.id); 
+          state.entities[ctrHold].cars[carIdx] = action.payload.car;
+      } else {
+          // checks to see if current dealer is aleady in array
+          // if it does, just add car to array of cars... if old dealer has no cars, remove dealer
+          const dealerIdx = state.entities.findIndex((dealer) => dealer.id === newdealerId);
+          if (dealerIdx > -1) {
+              state.entities[dealerIdx].cars.push(action.payload.car);
+              state.entities[ctrHold].cars.splice(carIdxHold, 1);
+          } else {
+              //if it does not insert entire action.payload and remove from old dealers car arrray
+              state.entities.push(action.payload);
+              state.entities[ctrHold].cars.splice(carIdxHold, 1);
+          }
+            if (state.entities[ctrHold].cars.length === 0) {
+              state.entities.splice((ctrHold), 1)
+            }
+      }
+
+
     },
     mydealerReset(state) {
       state.entities.length = 0;
