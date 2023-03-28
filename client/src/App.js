@@ -16,7 +16,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchDealers } from "./features/dealers/dealersSlice";
 import { fetchCars } from "./features/cars/carsSlice";
 import { fetchmyDealers } from "./features/mydealers/mydealersSlice";
-// import { mydealerInitialized  } from "./features/mydealers/mydealersSlice";
 import { userAdded } from "./features/user/userSlice";
 import { fetchRepairs } from "./features/repairs/repairsSlice";
 import './App.css';
@@ -41,12 +40,9 @@ function App() {
               dispatch(fetchDealers());
               dispatch(fetchCars());
               dispatch(fetchRepairs());
-              debugger
-              // dispatch(mydealerInitialized(user.id));
             })
         } else {
             res.json().then(error => {
-                debugger
                 console.log("/me error = ", error)
             })
         }   

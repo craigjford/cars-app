@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
-    def show    
+    def show   
         if session[:user_id] == nil
             render json: { errors: "User Session does not exist" }, status: :unauthorized
         else

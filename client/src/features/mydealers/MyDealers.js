@@ -1,22 +1,14 @@
 import React from 'react';
 import MyDealer from "./MyDealer";
-import { useSelector, useDispatch } from "react-redux";
-import { mydealerInitialized  } from "./mydealersSlice";
+import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
-function MyDealers() {
-
+function MyDealers() {  
   // dealers with cars
 
   const navigate = useNavigate();
 
-  const userArr = useSelector((state) => state.user.entities);
-  const user = userArr[0];
   const loggedIn = useSelector((state) => state.user.loggedIn);
-
-  const dispatch = useDispatch();
-
-  dispatch(mydealerInitialized(user.id));
 
   if (!loggedIn) {navigate('/')};
 

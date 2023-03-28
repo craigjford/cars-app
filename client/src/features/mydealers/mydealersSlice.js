@@ -13,16 +13,6 @@ const mydealersSlice = createSlice({
     status: "idle", // loading state
   },
   reducers: {
-    mydealerInitialized(state, action) {
-      let ctr = 0;
-      let arrLength = state.entities.length;
-      while (ctr < arrLength) {
-        let carArr = [];
-         carArr = state.entities[ctr].cars.filter((car) => car.user_id === action.payload)
-         state.entities[ctr].cars = carArr;
-        ctr = ctr + 1;
-      }
-    },
     mydealerAdded(state, action) {
       state.entities.push(action.payload);
     },
@@ -62,10 +52,8 @@ const mydealersSlice = createSlice({
         } 
         ctr = ctr + 1
       }
-      debugger
+
       //if dealer did not change - just change new car object from old
-      console.log('newdealerId = ', newdealerId);
-      console.log('olddealerId = ', oldDealerId);
       if (newdealerId === oldDealerId) {
           const carIdx = state.entities[ctrHold].cars.findIndex((car) => car.id === action.payload.car.id); 
           state.entities[ctrHold].cars[carIdx] = action.payload.car;
@@ -85,8 +73,6 @@ const mydealersSlice = createSlice({
               state.entities.splice((ctrHold), 1)
             }
       }
-
-
     },
     mydealerReset(state) {
       state.entities.length = 0;

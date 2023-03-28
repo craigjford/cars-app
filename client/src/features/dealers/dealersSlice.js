@@ -16,11 +16,11 @@ const dealersSlice = createSlice({
     dealerAdded(state, action) {
       state.entities.push(action.payload);
     },
-    dealerRemoved(state, action) {
-      const idx = state.entities.findIndex((dealer) => dealer.id === action.payload.id);
-      state.entities.splice(idx, 1);
+    // dealerRemoved(state, action) {
+    //   const idx = state.entities.findIndex((dealer) => dealer.id === action.payload.id);
+    //   state.entities.splice(idx, 1);
 
-    },
+    // },
     dealerReset(state) {
       state.entities.length = 0;
       state.status = "idle";
