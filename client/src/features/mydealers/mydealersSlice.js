@@ -19,10 +19,12 @@ const mydealersSlice = createSlice({
     mydealerCarAdded(state, action) {
       const idx = state.entities.findIndex((dealer) => dealer.id === action.payload.id);
       if (idx === -1) {
-          state.entities.push(action.payload) 
-      } else {
-          const car = action.payload.cars[0]
-          state.entities[idx].cars.push(car)
+          let payloadObj = {id: action.payload.id, name: action.payload.name, contact: action.payload.contact, phone: action.payload.phone,
+                email: action.payload.email, cars: []}
+          payloadObj.cars.push(action.payload.car)
+          state.entities.push(payloadObj); 
+      } else {      
+          state.entities[idx].cars.push(action.payload.car)
       }
     },
     mydealerCarRemoved(state, action) {

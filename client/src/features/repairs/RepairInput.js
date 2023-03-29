@@ -25,11 +25,19 @@ function RepairInput({ car, handleRepairSubmit }) {
     const handleChange = (e) => {
         const name = e.target.name;
 
-        if (name === "cost") {
-            setFormData({...formData, [name]: parseInt(e.target.value)})
-        } else {
-            setFormData({...formData, [name]: e.target.value})
-        }
+        setFormData({...formData, [name]: e.target.value})
+
+        // if (name === "cost") {
+            // debugger
+            // if (parseInt(e.target.value) === "NaN" ) {
+            //     setFormData({...formData, [name]: ""})
+            // } else {
+            //     setFormData({...formData, [name]: parseInt(e.target.value)})
+            // }
+        //     setFormData({...formData, [name]: e.target.value})
+        // } else {
+        //     setFormData({...formData, [name]: e.target.value})
+        // }
     } 
 
   const handleSubmit = (e) => {
@@ -80,7 +88,7 @@ function RepairInput({ car, handleRepairSubmit }) {
                 <input type="text" id="shop_name" name="shop_name" value={formData.shop_name} onChange={handleChange} />
                 <br />
                 <label>Cost: </label>
-                <input type="text" id="cost" name="cost" value={formData.cost} onChange={handleChange} />
+                <input type="number" id="cost" name="cost" value={formData.cost} onChange={handleChange} />
                 <br />
                 <label>Service Description: </label>
                 <input type="text" id="service_desc" name="service_desc" value={formData.service_desc} onChange={handleChange} />

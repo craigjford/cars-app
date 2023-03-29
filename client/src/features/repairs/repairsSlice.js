@@ -45,6 +45,10 @@ const repairsSlice = createSlice({
       })
       state.entities = repairArr;
     },
+    repairReset(state) {
+      state.entities.length = 0;
+      state.status = "idle";
+    },
   },
   extraReducers: {
     // handle async actions: pending, fulfilled, rejected (for errors)
@@ -58,6 +62,6 @@ const repairsSlice = createSlice({
   },
 });
 
-export const { repairAdded, repairRemoved, repairUpdated, repairCarRemoved, repairCarUpdated } = repairsSlice.actions;
+export const { repairAdded, repairRemoved, repairUpdated, repairCarRemoved, repairCarUpdated, repairReset } = repairsSlice.actions;
 
 export default repairsSlice.reducer;

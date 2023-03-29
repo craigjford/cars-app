@@ -5,6 +5,7 @@ import { userReset } from "./features/user/userSlice";
 import { dealerReset } from "./features/dealers/dealersSlice";
 import { carReset } from "./features/cars/carsSlice";
 import { mydealerReset } from "./features/mydealers/mydealersSlice";
+import { repairReset } from "./features/repairs/repairsSlice";
 
 const navStyles = ({ isActive }) => {
   return {  
@@ -32,6 +33,7 @@ function NavBar({ loggedIn }) {
         dispatch(carReset());
         dispatch(dealerReset());
         dispatch(mydealerReset());
+        dispatch(repairReset())
         navigate('/');
       }
     });

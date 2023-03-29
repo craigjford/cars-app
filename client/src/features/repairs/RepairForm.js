@@ -42,7 +42,13 @@ function RepairForm({ handleRepairSubmit}) {
         }
 
         if (name === "cost") {
-            setFormData({...formData, [name]: parseInt(e.target.value)})
+          // debugger
+            // if (parseInt(e.target.value) === "NaN" ) {
+            //     setFormData({...formData, [name]: ""})
+            // } else {
+            //     setFormData({...formData, [name]: parseInt(e.target.value)})
+            // }
+            setFormData({...formData, [name]: e.target.value})
         } else {
             setFormData({...formData, [name]: e.target.value})
         }
@@ -86,7 +92,7 @@ function RepairForm({ handleRepairSubmit}) {
                 <input type="text" id="shop_name" name="shop_name" value={formData.shop_name} onChange={handleChange} />
                 <br />
                 <label>Cost: </label>
-                <input type="text" id="cost" name="cost" value={formData.cost} onChange={handleChange} />
+                <input type="number" id="cost" name="cost" value={formData.cost} onChange={handleChange} />
                 <br />
                 <label>Service Description: </label>
                 <input type="text" id="service_desc" name="service_desc" value={formData.service_desc} onChange={handleChange} />
