@@ -1,6 +1,6 @@
 class DealersController < ApplicationController
-rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
-rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
+    before_action :authorize
 
     # def myindex
         # current_user = User.find(1)
@@ -19,12 +19,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     #     render json: dealers, status: :ok
     # end
 
-    # def myindex
-    #     sql = "SELECT * FROM dealers, cars where dealers.id = cars.dealer_id and cars.user_id = 1"
-    #     records_array = ActiveRecord::Base.connection.execute(sql)
-    #     byebug
-    # end
-
     def myindex
         # current_user = User.find(1)
         dealers = current_user.dealers.order(:name)
@@ -33,7 +27,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     
     def index
         dealers = Dealer.all.order(:name)   
-        render json: dealers, each_serializer: DealerAllSerializer, status: :ok
+        render json: dealers, status: :ok
     end
 
     def create
@@ -47,12 +41,8 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
         params.permit(:name, :contact, :phone, :email)
     end
 
-    def render_not_found(error)
-        render json: { error: "#{error.model} not found" }, status: :not_found
-    end
-
-    def render_unprocessable_entity(invalid) 
-        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+    def authorize   
+        return render json: { error: "User not authorized" }, status: :unauthorized unless session.include?(:user_id)
     end
 
 end

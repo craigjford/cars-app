@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 function MyDealer({ dealer }) {
 
-  // debugger
   const navigate = useNavigate();
 
   const loggedIn = useSelector((state) => state.user.loggedIn);

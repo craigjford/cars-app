@@ -1,6 +1,6 @@
 class RepairsController < ApplicationController
-    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+
+    before_action :authorize
 
     def index 
         repairs = current_user.repairs.order(:car_id)
@@ -39,12 +39,8 @@ class RepairsController < ApplicationController
         params.permit(:car_id, :shop_name, :cost, :service_desc)
     end
 
-    def render_not_found(error)
-        render json: { error: "#{error.model} not found" }, status: :not_found
-    end
-
-    def render_unprocessable_entity(invalid) 
-        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+    def authorize   
+        return render json: { error: "User not authorized" }, status: :unauthorized unless session.include?(:user_id)
     end
 
 end

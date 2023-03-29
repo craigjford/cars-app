@@ -3,9 +3,9 @@ class DealerCarSerializer < ActiveModel::Serializer
 
   # has_many :cars
   
-    def cars
-      myCars = self.object.cars.select {|c| c.user.id == self.scope.id}
-    end
+  def cars
+    myCars = self.object.cars.select {|c| c.user.id == self.scope.id}
+  end
 
     # def dealers_with_cars
     #   self.object.dealers.map do |dealer|

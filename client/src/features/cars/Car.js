@@ -27,10 +27,6 @@ function Car({ car }) {
     });
   }
 
-  // const handleUpdate = () => {
-  //   console.log('in handle car = ', car);
-  // }
-
   return (
     <div className="App">
         <h3>Year: {car.year}</h3>
@@ -43,7 +39,6 @@ function Car({ car }) {
         <br />
         <br />
         <button type="button" className="any-btn" onClick={handleDelete}>Delete Car</button>
-        {/* <button type="button" className="any-btn" onClick={handleUpdate}>Update Car</button> */}
         <Link to={`/cars/${car.id}/edits`}>
               <button className="submit-btn">Update Car</button>
         </Link>

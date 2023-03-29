@@ -1,5 +1,6 @@
 class CarsController < ApplicationController
-    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+
+    before_action :authorize
 
     def myindex 
         cars = current_user.cars.order(:dealer_id)
@@ -33,8 +34,8 @@ class CarsController < ApplicationController
         params.permit(:user_id, :dealer_id, :year, :make, :model)
     end
 
-    def render_unprocessable_entity(invalid) 
-        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+    def authorize   
+        return render json: { error: "User not authorized" }, status: :unauthorized unless session.include?(:user_id)
     end
 
 end

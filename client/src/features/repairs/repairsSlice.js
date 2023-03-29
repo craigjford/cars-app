@@ -14,7 +14,6 @@ const repairsSlice = createSlice({
   },
   reducers: {
     repairAdded(state, action) {
-      debugger
       state.entities.push(action.payload);
     },
     repairRemoved(state, action) {

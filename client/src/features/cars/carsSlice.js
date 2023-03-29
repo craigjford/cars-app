@@ -31,7 +31,6 @@ const carsSlice = createSlice({
       state.entities = carArr;
     }, 
     carRepairAdded(state, action) {
-      debugger
       const car = state.entities.find((car) => car.id === action.payload.car_id);
       car.repairs.push(action.payload);
     },

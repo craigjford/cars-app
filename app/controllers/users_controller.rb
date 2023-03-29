@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
 
-    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
-
     def show   
         if session[:user_id] == nil
             render json: { errors: "User Session does not exist" }, status: :unauthorized
@@ -27,11 +25,6 @@ class UsersController < ApplicationController
 
     def user_params              
         params.permit(:username, :password, :password_confirmation, :first_name, :last_name)
-    end
-
-
-    def render_unprocessable_entity(invalid) 
-        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 
 end

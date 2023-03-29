@@ -59,7 +59,6 @@ function RepairForm({ handleRepairSubmit}) {
       .then((res) => {
       if (res.ok) {
           res.json().then((data) => {
-              debugger
               dispatch(carRepairAdded(data))
               const repairObj =({...data, car: {id: carObj.id, user_id: carObj.user_id, dealer_id: carObj.dealer_id, year: carObj.year, make: carObj.make, model: carObj.model}})
               dispatch(repairAdded(repairObj));           
