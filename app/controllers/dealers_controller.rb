@@ -28,7 +28,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     def myindex
         # current_user = User.find(1)
         dealers = current_user.dealers.order(:name)
-        render json: dealers, status: :ok
+        render json: dealers, each_serializer: DealerCarSerializer,status: :ok
     end
     
     def index

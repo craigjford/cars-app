@@ -21,7 +21,8 @@ const mydealersSlice = createSlice({
       if (idx === -1) {
           state.entities.push(action.payload) 
       } else {
-          state.entities[idx].cars.push(action.payload.car)
+          const car = action.payload.cars[0]
+          state.entities[idx].cars.push(car)
       }
     },
     mydealerCarRemoved(state, action) {
@@ -65,10 +66,14 @@ const mydealersSlice = createSlice({
               state.entities[dealerIdx].cars.push(action.payload.car);
               state.entities[ctrHold].cars.splice(carIdxHold, 1);
           } else {
-              //if it does not insert entire action.payload and remove from old dealers car arrray
-              state.entities.push(action.payload);
+              //if new dealer does not exist, insert entire action.payload and remove from old dealers car arrray
+              let payloadObj = {id: action.payload.id, name: action.payload.name, contact: action.payload.contact, phone: action.payload.phone,
+                                  email: action.payload.email, cars: []}
+              payloadObj.cars.push(action.payload.car)                   
+              state.entities.push(payloadObj);
               state.entities[ctrHold].cars.splice(carIdxHold, 1);
           }
+            //  if old dealer has no more existing cars, delete old dealer from state
             if (state.entities[ctrHold].cars.length === 0) {
               state.entities.splice((ctrHold), 1)
             }

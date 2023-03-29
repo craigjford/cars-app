@@ -3,7 +3,7 @@ class RepairsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
     def index 
-        repairs = current_user.repairs
+        repairs = current_user.repairs.order(:car_id)
         render json: repairs, each_serializer: RepairAllSerializer, status: :ok
     end
 

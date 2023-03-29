@@ -31,7 +31,8 @@ function RepairShow() {
     if (!loggedIn) {navigate('/')};
 
     const handleCancel = () => {
-        navigate(`/cars/${repairData.car.id}/edits`);
+        // navigate(`/cars/${repairData.car.id}/edits`);
+        navigate(-1);
     }
 
     if (callRequired) {
