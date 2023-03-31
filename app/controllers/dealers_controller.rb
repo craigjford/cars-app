@@ -26,7 +26,7 @@ class DealersController < ApplicationController
     end
     
     def index
-        dealers = Dealer.all.order(:name)   
+        dealers = Dealer.all.order(:name)  
         render json: dealers, status: :ok
     end
 

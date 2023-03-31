@@ -25,6 +25,7 @@ class RepairsController < ApplicationController
 
     def update 
         repair = find_repair
+        byebug
         repair.update!(repair_params)
         render json: repair, status: :accepted
     end
@@ -36,7 +37,7 @@ class RepairsController < ApplicationController
     end
     
     def repair_params              
-        params.permit(:car_id, :shop_name, :cost, :service_desc)
+        params.permit(:id, :car_id, :shop_name, :cost, :service_desc)
     end
 
     def authorize   

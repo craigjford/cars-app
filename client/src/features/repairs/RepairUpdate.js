@@ -22,7 +22,6 @@ function RepairUpdate() {
 
     const filteredCar = cars.filter((c) => c.id === carId);
     const car = filteredCar[0];
-    console.log("car  = ", car);
 
     const repairId = parseInt(params.repair_id);
 
@@ -44,6 +43,7 @@ function RepairUpdate() {
     }
 
     const handleSubmit = (e) => {
+        debugger
         e.preventDefault();
         fetch (`/repairs/${repairId}`, {
           method: "PATCH",
@@ -53,7 +53,7 @@ function RepairUpdate() {
           body: JSON.stringify({
             car_id: carId,
             shop_name: shopName,
-            cost: parseInt(cost),
+            cost: cost,
             service_desc: serviceDesc
           })
         })  
@@ -75,28 +75,29 @@ function RepairUpdate() {
 
   return (
         <div>  
-          <>
-            <h3><u>Car Repair Update For</u></h3>
-            <h3>{car.year}  {car.make}  {car.model}</h3>
-          </>    
+            <h1 className="formheader">Car Repair Update For</h1>
+            <h3><u>{car.year}  {car.make}  {car.model}</u></h3> 
+            <br />
             <br />
             <form onSubmit={handleSubmit}>
-                <label>Shop Name: </label>
-                <input type="text" id="shop_name" name="shop_name" value={shopName} onChange={(e) => setShopName(e.target.value)} />
+                <label id="formlabel" htmlFor="shopname">Shop Name: </label>
+                <input type="text" id="shopname" name="shop_name" value={shopName} onChange={(e) => setShopName(e.target.value)} />
                 <br />
-                <label>Cost: </label>
+                <br />
+                <label id="formlabel" htmlFor="cost">Cost: </label>
                 <input type="text" id="cost" name="cost" value={cost} onChange={(e) => setCost(e.target.value)} />
                 <br />
-                <label>Service Description: </label>
-                <input type="text" id="service_desc" name="service_desc" value={serviceDesc} onChange={(e) => setServiceDesc(e.target.value)} />
                 <br />
+                <label id="formlabel" htmlFor="servicedesc">Service Description: </label>
+                <input type="text" id="servicedesc" name="service_desc" value={serviceDesc} onChange={(e) => setServiceDesc(e.target.value)} />
                 <br />
+                <br /><br />
                 <button type="submit" className="submit-btn">Update Repair</button>
                 <button type="button" className="submit-btn" onClick={handleCancel}>Cancel</button>
             </form>
             <br />
             <br />
-            {errors ? errors.map(e => <li style={{color:'red'}} key={e}>{e}</li>) : ""}
+            {errors ? errors.map(e => <li style={{color:'red'}} key={e}>{e}</li>) : ""}    
         </div>
   )
 }

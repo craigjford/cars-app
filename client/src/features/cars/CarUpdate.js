@@ -24,8 +24,7 @@ function CarUpdate() {
 
     const carsArr = useSelector((state) => state.cars.entities);
     const carArr = carsArr.filter((car) => car.id === parseInt(params.car_id));
-    const car = carArr[0];
-    console.log('in CarUpdate - car = ', car);  
+    const car = carArr[0]; 
 
     if (initializeState) {
         setInitializeState(false)
@@ -81,19 +80,24 @@ function CarUpdate() {
 
   return (
         <div className="App">    
+            <h1 className="formheader">Car Update</h1>
+            <br />
             <form onSubmit={handleSubmit}>
-                <label>Dealer: </label>
+                <label id="formlabel" htmlFor="username">Dealer: </label>
                 <select id="dealers" name="dealer_id" value={dealerId} onChange={(e) => setDealerId(parseInt(e.target.value))}>
                     {dealerList}
                 </select>    
                 <br />
-                <label>Year: </label>
+                <br />
+                <label id="formlabel" htmlFor="year">Year: </label>
                 <input type="text" id="year" name="year" value={year} onChange={(e) => setYear(parseInt(e.target.value))} />
                 <br />
-                <label>Make: </label>
+                <br />
+                <label id="formlabel" htmlFor="make">Make: </label>
                 <input type="text" id="make" name="make" value={make} onChange={(e) => setMake(e.target.value)} />
                 <br />
-                <label>Model: </label>
+                <br />
+                <label id="formlabel" htmlFor="model">Model: </label>
                 <input type="text" id="model" name="model" value={model} onChange={(e) => setModel(e.target.value)} />
                 <br />
                 <br />

@@ -55,18 +55,23 @@ function DealerInput({ setAddingDealer }) {
     }
 
   return (
-        <div>    
+        <div> 
+            <h1 className="formheader">Add A Dealer</h1>
+            <br />  
             <form onSubmit={handleSubmit}>
-                <label>Name: </label>
+                <label id="formlabel" htmlFor="name">Name: </label>
                 <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
                 <br />
-                <label>Contact: </label>
+                <br />
+                <label id="formlabel" htmlFor="contact">Contact: </label>
                 <input type="text" id="contact" name="contact" value={formData.contact} onChange={handleChange} />
                 <br />
-                <label>Phone: </label>
+                <br />
+                <label id="formlabel" htmlFor="phone">Phone: </label>
                 <input type="text" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
                 <br />
-                <label>EMail: </label>
+                <br />
+                <label id="formlabel" htmlFor="email">EMail: </label>
                 <input type="text" id="email" name="email" value={formData.email} onChange={handleChange} />
                 <br />
                 <br />

@@ -69,21 +69,27 @@ function CarInput({ handleCarInput }) {
     }
       
   return (
-        <div>    
+        <div> 
+            <h1 className="formheader">Add A Car</h1>
+            <br />   
             <form onSubmit={handleSubmit}>
-                <label>Dealer: </label>
+                <label id="formlabel" htmlFor="dealers">Dealer: </label>
                 <select id="dealers" name="dealer_id" value={formData.dealer_id} onChange={handleChange}>
                     {dealerList}
                 </select>    
                 <br />
-                <label>Year: </label>
+                <br />
+                <label id="formlabel" htmlFor="year">Year: </label>
                 <input type="text" id="year" name="year" value={formData.year} onChange={handleChange} />
                 <br />
-                <label>Make: </label>
+                <br />
+                <label id="formlabel" htmlFor="make">Make: </label>
                 <input type="text" id="make" name="make" value={formData.make} onChange={handleChange} />
                 <br />
-                <label>Model: </label>
+                <br />
+                <label id="formlabel" htmlFor="model">Model: </label>
                 <input type="text" id="model" name="model" value={formData.model} onChange={handleChange} />
+                <br />
                 <br />
                 <br />
                 <button type="submit" className="submit-btn">Submit</button>

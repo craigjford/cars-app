@@ -96,7 +96,7 @@ function UserSignUpForm() {
           <label id="formlabel" htmlFor="firstname">First Name: </label>
             <input
               type="text"
-              id="first_name"
+              id="firstname"
               onChange={handleChange}
               value={formData.first_name}
             />
@@ -105,7 +105,7 @@ function UserSignUpForm() {
           <label id="formlabel" htmlFor="lastname">Last Name: </label>
             <input
               type="text"
-              id="last_name"
+              id="lastname"
               onChange={handleChange}
               value={formData.last_name}
             />
