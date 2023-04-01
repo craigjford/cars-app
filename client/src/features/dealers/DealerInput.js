@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { dealerAdded } from "./dealersSlice";
 
-function DealerInput({ setAddingDealer }) {
+function DealerInput({ setAddingDealer, handleCancel }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
         name: "",
@@ -77,6 +77,7 @@ function DealerInput({ setAddingDealer }) {
                 <br />
                 <br />
                 <button type="submit" className="submit-btn">Add Dealer</button>
+                <button type="button" className="any-btn" onClick={handleCancel}>Cancel</button>
             </form>
             <br />
             <br />

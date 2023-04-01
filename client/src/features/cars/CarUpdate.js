@@ -83,7 +83,7 @@ function CarUpdate() {
             <h1 className="formheader">Car Update</h1>
             <br />
             <form onSubmit={handleSubmit}>
-                <label id="formlabel" htmlFor="username">Dealer: </label>
+                <label id="formlabel" htmlFor="dealers">Dealer: </label>
                 <select id="dealers" name="dealer_id" value={dealerId} onChange={(e) => setDealerId(parseInt(e.target.value))}>
                     {dealerList}
                 </select>    

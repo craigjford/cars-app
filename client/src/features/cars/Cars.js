@@ -24,6 +24,10 @@ function Cars() {
     setAddingCar(false);
   }
 
+  const handleCancel = () => {
+    setAddingCar(false);
+  }
+
   return (
     <div className="App">
       <h1><u><i>My Cars</i></u></h1>
@@ -32,9 +36,7 @@ function Cars() {
       <br />
       {addingCar ? null : <button type="button" className="submit-btn" onClick={handleClick}>Add Car</button>}
       <br />
-      <br />
-      <br />
-      {addingCar ? <CarInput handleCarInput={handleCarInput} /> : null}
+      {addingCar ? <CarInput handleCarInput={handleCarInput} handleCancel={handleCancel} /> : null}
     </div>
   )
 }

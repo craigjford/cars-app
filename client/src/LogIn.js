@@ -6,7 +6,6 @@ import { fetchDealers } from "./features/dealers/dealersSlice";
 import { fetchCars } from "./features/cars/carsSlice";
 import { fetchmyDealers } from "./features/mydealers/mydealersSlice";
 import { fetchRepairs } from "./features/repairs/repairsSlice";
-// import { mydealerInitialized } from "./features/mydealers/mydealersSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -36,7 +35,6 @@ const Login = () => {
             dispatch(fetchDealers());
             dispatch(fetchCars());
             dispatch(fetchRepairs());
-            // dispatch(mydealerInitialized(user.id));
             setUsername("");
             setPassword("");
             navigate('/');

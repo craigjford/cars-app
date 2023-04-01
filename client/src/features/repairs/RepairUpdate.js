@@ -38,7 +38,6 @@ function RepairUpdate() {
     const dispatch = useDispatch();
 
     const handleCancel = () => {
-        // navigate(`/cars/${car.id}/edits`)
         navigate(-1);
     }
 
@@ -64,7 +63,6 @@ function RepairUpdate() {
                     const repairObj =({...data, car: {id: car.id, user_id: car.user_id, dealer_id: car.dealer_id,
                                   year: car.year, make: car.make, model: car.model}})
                     dispatch(repairUpdated(repairObj)) 
-                    // navigate(`/cars/${car.id}/edits`)
                     navigate(-1);
                 }) 
             } else {

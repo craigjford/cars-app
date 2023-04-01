@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { carAdded } from "./carsSlice";
 import { mydealerCarAdded } from "../mydealers/mydealersSlice";
 
-function CarInput({ handleCarInput }) {
+function CarInput({ handleCarInput, handleCancel }) {
     const [errors, setErrors] = useState([]);
     const [formData, setFormData] = useState({
         dealer_id: "",
@@ -93,6 +93,7 @@ function CarInput({ handleCarInput }) {
                 <br />
                 <br />
                 <button type="submit" className="submit-btn">Submit</button>
+                <button type="button" className="any-btn" onClick={handleCancel}>Cancel</button>
             </form>
             <br />
             <br />

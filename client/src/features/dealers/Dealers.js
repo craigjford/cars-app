@@ -21,6 +21,10 @@ function Dealers() {
     setAddingDealer(true);
   }
 
+  const handleCancel = () => {
+    setAddingDealer(false);
+  }
+
   return (
     <div className="App">
       <h1><i><u>All Dealers</u></i></h1>
@@ -31,7 +35,7 @@ function Dealers() {
       {addingDealer ? null : <button type="button" className="submit-btn" onClick={handleClick}>Add Dealer</button>}
       <br />
       <br />
-      {addingDealer ? <DealerInput setAddingDealer={setAddingDealer} /> : null}
+      {addingDealer ? <DealerInput setAddingDealer={setAddingDealer} handleCancel={handleCancel} /> : null}
     </div>
   )
 }
