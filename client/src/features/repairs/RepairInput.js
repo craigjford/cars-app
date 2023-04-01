@@ -12,9 +12,8 @@ function RepairInput({ car, handleRepairSubmit }) {
         service_desc: ""
     });
 
-    console.log("car = ", car);
-    const carObj = {id: car.id, user_id: car.user_id, dealer_id: car.dealer_id, year: car.year, make: car.make, model: car.model};
-    console.log(("carObj = ", carObj))
+    // const carObj = {id: car.id, user_id: car.user_id, dealer_id: car.dealer_id, year: car.year, make: car.make, model: car.model};
+    // console.log(("carObj = ", carObj))
 
     const loggedIn = useSelector((state) => state.user.loggedIn);
 

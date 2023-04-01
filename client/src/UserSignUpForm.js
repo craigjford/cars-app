@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
+import { fetchDealers } from "./features/dealers/dealersSlice";
 import { userAdded } from "./features/user/userSlice"
 
 function UserSignUpForm() {
@@ -36,6 +37,7 @@ function UserSignUpForm() {
             if (res.ok) {
                 res.json().then(user => {
                   dispatch(userAdded(user)) 
+                  dispatch(fetchDealers());
                   initializeFormfields();
                   navigate('/');
                 })
@@ -93,19 +95,21 @@ function UserSignUpForm() {
             />
           <br />
           <br /> 
-          <label id="formlabel" htmlFor="firstname">First Name: </label>
+          <label id="formlabel" htmlFor="first_name">First Name: </label>
             <input
               type="text"
-              id="firstname"
+              id="first_name"
+              name="first_name"
               onChange={handleChange}
               value={formData.first_name}
             />
           <br />
           <br /> 
-          <label id="formlabel" htmlFor="lastname">Last Name: </label>
+          <label id="formlabel" htmlFor="last_name">Last Name: </label>
             <input
               type="text"
-              id="lastname"
+              id="last_name"
+              name="last_name"
               onChange={handleChange}
               value={formData.last_name}
             />

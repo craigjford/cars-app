@@ -25,7 +25,6 @@ class RepairsController < ApplicationController
 
     def update 
         repair = find_repair
-        byebug
         repair.update!(repair_params)
         render json: repair, status: :accepted
     end

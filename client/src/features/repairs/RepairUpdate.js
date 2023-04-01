@@ -42,7 +42,6 @@ function RepairUpdate() {
     }
 
     const handleSubmit = (e) => {
-        debugger
         e.preventDefault();
         fetch (`/repairs/${repairId}`, {
           method: "PATCH",
