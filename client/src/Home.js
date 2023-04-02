@@ -14,10 +14,17 @@ const Home = ({ isHome }) => {
       <div>
         {isHome  ? (
           <>
-            <h1>Welcome {user.first_name} {user.last_name} to Your Home Page!</h1>
+            <h1 className="App">Welcome {user.first_name} {user.last_name} to Your Car Repository Home Page!</h1>
             <br />
+            <h2 className="App">UserName: {user.username}</h2>
             <br />
-            <h2>UserName: {user.username}</h2>
+            <hr />
+            <br />
+            <h4>The Car Repository application will allow a registered user to keep track of all of their cars. 
+              The application will also allow a user to keep track of all the dealers from whom a user has 
+              purchased a car.  Additionally the application allows a user to track all of the repairs performed
+              on each car.  Welcome to the application and please <u>Sign Up or Login</u> to enjoy the application!!
+            </h4>
           </>
     ) : (
           <>
