@@ -16,8 +16,7 @@ function CarInput({ handleCarInput, handleCancel }) {
     const loggedIn = useSelector((state) => state.user.loggedIn);
     const navigate = useNavigate();
 
-    const userArr = useSelector((state) => state.user.entities);
-    const user = userArr[0];
+    const user = useSelector((state) => state.user.entities);
 
     const dealers = useSelector((state) => state.dealers.entities);
 

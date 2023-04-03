@@ -19,8 +19,7 @@ function CarUpdate() {
 
     const loggedIn = useSelector((state) => state.user.loggedIn);
     const dealers = useSelector((state) => state.dealers.entities);
-    const userArr = useSelector((state) => state.user.entities);
-    const user = userArr[0];
+    const user = useSelector((state) => state.user.entities);
 
     const carsArr = useSelector((state) => state.cars.entities);
     const carArr = carsArr.filter((car) => car.id === parseInt(params.car_id));

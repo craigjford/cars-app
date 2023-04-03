@@ -1,14 +1,13 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 
-
 const Home = ({ isHome }) => {
 
-  const userArr = useSelector((state) => state.user.entities);
-  const user = userArr[0];
+  const user = useSelector((state) => state.user.entities);
+
   const loggedIn = useSelector((state) => state.user.loggedIn);
 
-  if (!loggedIn) return <h1>Home Page - Please Login or Sign Up</h1>;
+  if (!loggedIn) return <h1 className="App">Home Page - Please Login or Sign Up</h1>;
 
   return (
       <div>

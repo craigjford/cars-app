@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchUser = createAsyncThunk("user/fetchUser", () => {
-  return fetch("/me")
+  return fetch("/users")
     .then((response) => response.json())
     .then((user) => user);
 });
@@ -9,31 +9,21 @@ export const fetchUser = createAsyncThunk("user/fetchUser", () => {
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    entities: [], // array of user
+    entities: {}, 
     // entities: {
     //    first_name: "",
     //    last_name: "",
     //    cars: [],
     //    repairs: []
     // },
-    status: "idle", // loading state
+    status: "idle", 
     loggedIn: false
   },
   reducers: {
     userAdded(state, action) {
-      state.entities.push(action.payload);
+      state.entities = action.payload
+      // state.entities.push(action.payload);
       state.loggedIn = true;
-    },
-    userRemoved(state, action) {
-      let bId = true;
-      while (bId) {
-          const idx = state.entities.findIndex((review) => review.restaurantId === action.payload);
-          if (idx === -1) {
-              bId = false
-          } else {
-              state.entities.splice(idx, 1);
-          }
-      } 
     },
     userReset(state) {
       state.entities.length = 0;

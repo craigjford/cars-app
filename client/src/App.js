@@ -22,11 +22,7 @@ import './App.css';
 
 function App() {
 
-  const userArr = useSelector((state) => state.user.entities);
-  const user = userArr[0];
   const loggedIn = useSelector((state) => state.user.loggedIn);
-
-  console.log("in App - user = ", user);
 
   const dispatch = useDispatch();
 
@@ -48,6 +44,25 @@ function App() {
         }   
     })
   }, [dispatch])
+
+  // if (!loggedIn) {
+  //   fetch('/me')
+  //   .then(res => {
+  //       if(res.ok) {
+  //           res.json().then(user => {
+  //             dispatch(userAdded(user));
+  //             dispatch(fetchmyDealers());
+  //             dispatch(fetchDealers());
+  //             dispatch(fetchCars());
+  //             dispatch(fetchRepairs());
+  //           })
+  //       } else {
+  //           res.json().then(error => {
+  //               console.log("/me error = ", error)
+  //           })
+  //       }   
+  //   })
+  // }
 
   const userStatus = useSelector((state) => state.user.status)
   const dealerStatus = useSelector((state) => state.dealers.status);
