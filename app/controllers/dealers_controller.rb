@@ -26,8 +26,16 @@ class DealersController < ApplicationController
     end
     
     def index
-        dealers = Dealer.all.order(:name)  
+        # dealers = Dealer.all.order(:name)  
+        dealers = Dealer.all.order(:id) 
         render json: dealers, status: :ok
+    end
+
+    def destroy
+        dealer = find_dealer
+        # byebug
+        dealer.destroy
+        head :no_content
     end
 
     def create
@@ -36,6 +44,10 @@ class DealersController < ApplicationController
     end
 
     private
+
+    def find_dealer
+        Dealer.find(params[:id])
+    end
 
     def dealer_params 
         params.permit(:name, :contact, :phone, :email)
