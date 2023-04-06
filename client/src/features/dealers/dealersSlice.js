@@ -37,6 +37,6 @@ const dealersSlice = createSlice({
   },
 });
 
-export const { dealerAdded, dealerRemoved, dealerReset } = dealersSlice.actions;
+export const { dealerAdded, dealerReset } = dealersSlice.actions;
 
 export default dealersSlice.reducer;
