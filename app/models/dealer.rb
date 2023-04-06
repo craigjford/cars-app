@@ -7,3 +7,5 @@ class Dealer < ApplicationRecord
     validates :phone, numericality: { only_integer: true}
 
 end
+
+

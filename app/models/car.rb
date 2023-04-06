@@ -10,3 +10,4 @@ class Car < ApplicationRecord
   validates :year, numericality: { less_than: 2024 }
 
 end
+
