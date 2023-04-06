@@ -45,25 +45,6 @@ function App() {
     })
   }, [dispatch])
 
-  // if (!loggedIn) {
-  //   fetch('/me')
-  //   .then(res => {
-  //       if(res.ok) {
-  //           res.json().then(user => {
-  //             dispatch(userAdded(user));
-  //             dispatch(fetchmyDealers());
-  //             dispatch(fetchDealers());
-  //             dispatch(fetchCars());
-  //             dispatch(fetchRepairs());
-  //           })
-  //       } else {
-  //           res.json().then(error => {
-  //               console.log("/me error = ", error)
-  //           })
-  //       }   
-  //   })
-  // }
-
   const userStatus = useSelector((state) => state.user.status)
   const dealerStatus = useSelector((state) => state.dealers.status);
   const carsStatus = useSelector((state) => state.cars.status);
