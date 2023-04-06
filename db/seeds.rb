@@ -13,6 +13,8 @@
 
 puts "Users done";
 
+Dealer.all.destroy;
+
 d1 = Dealer.create!(name: "DCH Honda", contact: "Al Colquitt", phone: "7326712550", email: "alc@honda.com");
 d2 = Dealer.create!(name: "FJK Volkswagen", contact: "Jeff Egle", phone: "7326713330", email: "jegle@vw.com");
 d2 = Dealer.create!(name: "Preferred Motors", contact: "Pat Jackson", phone: "9084503556", email: "pjackson@preferred.com");
