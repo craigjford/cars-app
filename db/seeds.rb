@@ -11,18 +11,18 @@
 # u1 = User.create!(username: "craigjford", first_name: "Craig", last_name: "Ford");
 # u2 = User.create!(username: "larrymag", first_name: "Larry", last_name: "Magruder");
 
-puts "Users done";
+# puts "Users done";
 
-Dealer.all.destroy;
+# Dealer.all.destroy;
 
-d1 = Dealer.create!(name: "DCH Honda", contact: "Al Colquitt", phone: "7326712550", email: "alc@honda.com");
-d2 = Dealer.create!(name: "FJK Volkswagen", contact: "Jeff Egle", phone: "7326713330", email: "jegle@vw.com");
-d2 = Dealer.create!(name: "Preferred Motors", contact: "Pat Jackson", phone: "9084503556", email: "pjackson@preferred.com");
-d2 = Dealer.create!(name: "JG Motors", contact: "John Grommesh", phone: "2015467234", email: "grommesh@rapid.com");
-d2 = Dealer.create!(name: "Schwartz Mazda", contact: "Tom Och", phone: "6468590461", email: "toch@sch_mazda.com");
-d2 = Dealer.create!(name: "Baja Motors", contact: "Bryan Knotts", phone: "6095288443", email: "b_knotts@baja.com");
+# d1 = Dealer.create!(name: "DCH Honda", contact: "Al Colquitt", phone: "7326712550", email: "alc@honda.com");
+# d2 = Dealer.create!(name: "FJK Volkswagen", contact: "Jeff Egle", phone: "7326713330", email: "jegle@vw.com");
+# d2 = Dealer.create!(name: "Preferred Motors", contact: "Pat Jackson", phone: "9084503556", email: "pjackson@preferred.com");
+# d2 = Dealer.create!(name: "JG Motors", contact: "John Grommesh", phone: "2015467234", email: "grommesh@rapid.com");
+# d2 = Dealer.create!(name: "Schwartz Mazda", contact: "Tom Och", phone: "6468590461", email: "toch@sch_mazda.com");
+# d2 = Dealer.create!(name: "Baja Motors", contact: "Bryan Knotts", phone: "6095288443", email: "b_knotts@baja.com");
 
-puts "Dealers done";
+# puts "Dealers done";
 
 # c1 = Car.create!(user_id: u1.id, dealer_id: d1.id, year: 2004, make: "Honda", model: "Civic");
 # c2 = Car.create!(user_id: u1.id, dealer_id: d2.id, year: 2014, make: "VW", model: "Rabbit");
