@@ -10,12 +10,6 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     entities: {}, 
-    // entities: {
-    //    first_name: "",
-    //    last_name: "",
-    //    cars: [],
-    //    repairs: []
-    // },
     status: "idle", 
     loggedIn: false
   },
